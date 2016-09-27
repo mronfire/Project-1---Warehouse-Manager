@@ -48,6 +48,16 @@ void Purchase::setPurchaseDate(string date)
     purchaseDate = date;
 }
 
+void Purchase::setNextMember(Purchase *otherMember)
+{
+    nextMember = otherMember;
+}
+
+void Purchase::setNextDay(Purchase *otherDay)
+{
+    nextDay = otherDay;
+}
+
 string Purchase::getMemberNum() const
 {
     return memberNum;

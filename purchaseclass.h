@@ -1,8 +1,6 @@
 #ifndef PURCHASECLASS_H
 #define PURCHASECLASS_H
 
-#include <string>
-
 using namespace std;
 
 class Purchase
@@ -21,6 +19,8 @@ public:
     void setObjPrice(float cost);
     void setObjQuantity(int amount);
     void setPurchaseDate(string date);
+    void setNextMember(Purchase *otherMember);
+    void setNextDay(Purchase *otherDay);
 
     //ACCESSORS
     string getMemberNum() const;

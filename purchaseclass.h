@@ -3,6 +3,8 @@
 
 #include <string>
 
+using namespace std;
+
 class Purchase
 {
 public:
@@ -26,6 +28,8 @@ public:
     float getObjPrice() const;
     int getObjQuantity() const;
     string getPurchaseDate() const;
+    Purchase *getNextMember() const;
+    Purchase *getNextDay() const;
 
 private:
 

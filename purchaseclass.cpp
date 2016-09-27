@@ -73,3 +73,12 @@ string Purchase::getPurchaseDate() const
     return purchaseDate;
 }
 
+Purchase *Purchase::getNextMember() const
+{
+	return nextMember;
+}
+
+Purchase *Purchase::getNextDay() const
+{
+	return nextDay;
+}

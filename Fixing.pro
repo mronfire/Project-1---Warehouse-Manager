@@ -16,13 +16,15 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     sales.cpp \
     purchase.cpp \
-    member.cpp
+    member.cpp \
+    fileparsing.cpp
 
 HEADERS  += mainwindow.h \
     header.h \
     purchase.h \
     sales.h \
-    member.h
+    member.h \
+    fileparsing.h
 
 FORMS    += mainwindow.ui
 

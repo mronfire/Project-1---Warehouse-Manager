@@ -17,3 +17,8 @@ void MainWindow::on_pushButton_clicked()
 {
     ui->label->setText("No Seriously get out of here");
 }
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    this->close();
+}

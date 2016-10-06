@@ -8,9 +8,11 @@
 #include<fstream>
 #include<sstream>
 #include<string>
+#include<QString>
 
 using namespace std;
 
 const int NUMDAYS = 5;
+const float TAX_RATE = 0.08;
 
 #endif // HEADER_H

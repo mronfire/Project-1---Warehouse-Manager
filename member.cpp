@@ -1,17 +1,16 @@
 #include "member.h"
 
-member::member(): name("BLANK"), number("00000"), memType(NORMAL), totalSpent(0), totalTax(0), nextMember(NULL), firstPurchase(NULL), lastPurchase(NULL)
+member::member(): name("BLANK"), number("00000"), memType(NORMAL), totalSpent(0), nextMember(NULL), firstPurchase(NULL), lastPurchase(NULL)
 {
 
 }
 
-member::member(string iName, string iNumber, bool iMemType, float iTotalSpent, float iTotalTax, member *iNextMember, Purchase *iFirstPurchase, Purchase *iLastPurchase)
+member::member(string iName, string iNumber, bool iMemType, float iTotalSpent, member *iNextMember, Purchase *iFirstPurchase, Purchase *iLastPurchase)
 {
     name = iName;
     number = iNumber;
     memType = iMemType;
     totalSpent = iTotalSpent;
-    totalTax = iTotalTax;
     nextMember = iNextMember;
     firstPurchase = iFirstPurchase;
     lastPurchase = iLastPurchase;
@@ -85,19 +84,6 @@ void member::CalcTotalTax()
     tax = totalSpent * TAX_RATE;
 
     totalTax = totalSpent + tax;
-}
-
-void member::AddPurchase(Purchase *a)
-{
-    if(firstPurchase == NULL) //if nothing in the list
-    {
-        firstPurchase = a; //add to end of list
-    }
-    else //if stuff in list
-    {
-        lastPurchase->setNextMember(a); //add to back of list
-    }
-    lastPurchase = a;
 }
 
 void member::Expiration(string a)
@@ -189,6 +175,34 @@ void member::Renew()
     expiration[9] = m;
 }
 
+void member::AddPurchase(Purchase *a)
+{
+    if(firstPurchase == NULL) //if nothing in the list
+    {
+        firstPurchase = a; //add to end of list
+    }
+    else //if stuff in list
+    {
+        lastPurchase->setNextMember(a); //add to back of list
+    }
+    lastPurchase = a;
+}
+
+void ExecClass::AddPurchase(Purchase *a)
+{
+    if(GetFirstPurchase() == NULL) //if nothing in the list
+    {
+        SetFirstPurchase(a); //add to end of list
+    }
+    else //if stuff in list
+    {
+        GetLastPurchase()->setNextMember(a); //add to back of list
+    }
+    SetLastPurchase(a);
+
+    AddRebate(a);
+}
+
 string member::GetName()
 {
     return name;
@@ -221,17 +235,56 @@ member *member::GetNextMember()
 
 Purchase *member::GetFirstPurchase()
 {
-    return firstPurchase;
+        return firstPurchase;
 }
 
 Purchase *member::GetLastPurchase()
 {
-    return lastPurchase;
+        return lastPurchase;
 }
 
-void ExecClass::CalcRebate()
+member *member::GetThisMember(string findNum)
 {
-    rebate = REBATE_RATE * GetSpent();
+    member *memptr;
+
+    if(number == findNum)
+    {
+        memptr = this;
+    }
+    else
+    {
+        if(nextMember != NULL)
+        {
+            memptr = nextMember->GetThisMember(findNum);
+            //recursive call goes through list until it finds member
+        }
+        else
+        {
+            memptr = NULL;
+            //if the member can't be found, return NULL
+        }
+    }
+
+    return memptr;
+}
+
+float ExecClass::GetRebate()
+{
+    return rebate;
+}
+
+void ExecClass::SetRebate(float newRebate)
+{
+    rebate = newRebate;
+}
+
+void ExecClass::AddRebate(Purchase *purch)
+{
+    float receit;
+
+    receit = purch->getObjPrice() * purch->getObjQuantity();
+
+    rebate += receit * REBATE_RATE;
 }
 
 void ExecClass::AdjustType()
@@ -270,7 +323,7 @@ void ExecClass::AdjustType()
     }
 }
 
-void ExecClass::ChangeMembership()
+void member::ChangeMembership()
 {
     if(GetType() == EXEC)
     {
@@ -282,7 +335,13 @@ void ExecClass::ChangeMembership()
     }
 }
 
-float ExecClass::GetRebate()
-{
-    return rebate;
-}
+
+
+
+
+
+
+
+
+
+

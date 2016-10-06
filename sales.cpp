@@ -103,6 +103,21 @@ string SalesDay::GetDate()
     return date;
 }
 
+int SalesDay::GetMem()
+{
+    return numMem;
+}
+
+int SalesDay::GetExec()
+{
+    return numExec;
+}
+
+float SalesDay::GetRevenue()
+{
+    return revenue;
+}
+
 void SalesDay::SetDate(string today)
 {
     date = today;
@@ -135,8 +150,10 @@ void SalesDay::SetNextDay(SalesDay *a)
     tomorrow = a;
 }
 
-void SalesDay::AddPurchase(Purchase *a)
+void SalesDay::AddPurchase(Purchase *a, member *memList)
 {
+    member *customer;
+
     if(firstPurchase == NULL) //if nothing in the list
     {
         firstPurchase = a; //add to end of list
@@ -146,6 +163,22 @@ void SalesDay::AddPurchase(Purchase *a)
         lastPurchase->setNextDay(a); //add to back of list
     }
     lastPurchase = a;
+
+    revenue += (a->getObjPrice() * a->getObjQuantity());
+
+    customer = memList->GetThisMember(a->getMemberNum());
+
+    if(customer != NULL)
+    {
+        if(customer->GetType())
+        {
+            numExec++;
+        }
+        else
+        {
+            numMem++;
+        }
+    }
 }
 
 void SalesDay::Print()

@@ -124,7 +124,7 @@ void ReadPurchases(string inFile, member *memberList, SalesDay *dayList)
 
             if(dayptr != NULL) //if we have the right day
             {
-                dayptr->AddPurchase(purchptr);
+                dayptr->AddPurchase(purchptr, memberList);
             }
             else //if this runs, I am finding an out of bounds day
             {
@@ -204,6 +204,9 @@ string DeleteDays(SalesDay *dayList)
     while(dayList != NULL) //day is on charge of deallocating purchases
     {
         cout << "Sales Date: " << dayList->GetDate() << endl;
+        cout << "Total Revenue: $" << dayList->GetRevenue() << endl;
+        cout << "Total Regular Members: " << dayList->GetMem() << endl;
+        cout << "Total Executive Members: " << dayList->GetExec() << endl;
         while(dayptr->GetFirstPurchase() != NULL)
         {
             cout << " -" << dayptr->GetFirstPurchase()->getObjType() << endl;

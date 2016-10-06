@@ -3,6 +3,7 @@
 
 #include "header.h"
 #include "purchase.h"
+#include "member.h"
 
 class SalesDay
 {
@@ -21,10 +22,13 @@ public:
     SalesDay *GetNextDay();
     Purchase *GetFirstPurchase();
     string GetDate();
+    int GetMem();
+    int GetExec();
+    float GetRevenue();
     void SetDate(string today);
     void IncreaseRevenue(int addRevenue);
     void MemberCount(bool member);
-    void AddPurchase(Purchase *a);
+    void AddPurchase(Purchase *a, member *memList);
     void SetFirstPurchase(Purchase *newFirst);
     void SetNextDay(SalesDay *a);
     void Print();

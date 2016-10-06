@@ -2,6 +2,7 @@
 #define MEMBER_H
 
 #include"purchase.h"
+#include<limits>
 
 using namespace std;
 
@@ -16,7 +17,7 @@ private:
     string number; //Member number
     bool memType; //True if exec, false if normal member
     string expiration;
-    float totalSpent; //Total money spent by member before tax
+    float totalSpent; //Total money spent by member
     float totalTax; //Total money spent by member after tax
     member *nextMember;
     Purchase *firstPurchase;
@@ -24,7 +25,7 @@ private:
 
 public:
     member();
-    member(string iName, string iNumber, bool iMemType, float iTotalSpent, float iTotalTax, member *iNextMember, Purchase *iFirstPurchase, Purchase *iLastPurchase);
+    member(string iName, string iNumber, bool iMemType, float iTotalSpent, member *iNextMember, Purchase *iFirstPurchase, Purchase *iLastPurchase);
     void SetName(string newName);
     void SetNumber(string newNum);
     void SetType(bool newType);
@@ -34,9 +35,10 @@ public:
     void SetNextMember(member *newNextMember);
     void SetFirstPurchase(Purchase *newPurch);
     void SetLastPurchase(Purchase *newPurch);
-    void AddPurchase(Purchase *a);
+    virtual void AddPurchase(Purchase *a);
     void Expiration(string today);
     void Renew();
+    void ChangeMembership();
 
     string GetName();
     string GetNumber();
@@ -46,6 +48,7 @@ public:
     member *GetNextMember();
     Purchase *GetFirstPurchase();
     Purchase *GetLastPurchase();
+    member *GetThisMember(string findNum); //call this from memList
 };
 
 class ExecClass:public member
@@ -54,11 +57,11 @@ private:
     float rebate;
 
 public:
-    void CalcRebate(); //Calculates rebate using total spent before tax
-    void AdjustType();
-    void ChangeMembership();
-
     float GetRebate();
+    void SetRebate(float newRebate);
+    void AddRebate(Purchase *purch);
+    void AdjustType();
+    virtual void AddPurchase(Purchase *a);
 };
 
-#endif
+#endif // MEMBER_H

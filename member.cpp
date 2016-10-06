@@ -1,20 +1,20 @@
 #include "member.h"
 
-member::member(): name("BLANK"), number("00000"), memType(NORMAL), totalSpent(0), nextMember(NULL), firstPurchase(NULL), lastPurchase(NULL), expiration("BLANK")
+member::member(): name("BLANK"), number("00000"), memType(NORMAL), totalSpent(0), totalTax(0), nextMember(NULL), firstPurchase(NULL), lastPurchase(NULL)
 {
 
 }
 
-member::member(string iName, string iNumber, bool iMemType, float iTotalSpent, member *iNextMember, Purchase *iFirstPurchase, Purchase *iLastPurchase, string iExpiration)
+member::member(string iName, string iNumber, bool iMemType, float iTotalSpent, float iTotalTax, member *iNextMember, Purchase *iFirstPurchase, Purchase *iLastPurchase)
 {
     name = iName;
     number = iNumber;
     memType = iMemType;
     totalSpent = iTotalSpent;
+    totalTax = iTotalTax;
     nextMember = iNextMember;
     firstPurchase = iFirstPurchase;
     lastPurchase = iLastPurchase;
-    expiration = iExpiration;
 }
 
 void member::SetName(string newName)
@@ -78,6 +78,15 @@ void member::CalcTotalSpent()
     }
 }
 
+void member::CalcTotalTax()
+{
+    float tax;
+
+    tax = totalSpent * TAX_RATE;
+
+    totalTax = totalSpent + tax;
+}
+
 void member::AddPurchase(Purchase *a)
 {
     if(firstPurchase == NULL) //if nothing in the list
@@ -91,27 +100,7 @@ void member::AddPurchase(Purchase *a)
     lastPurchase = a;
 }
 
-string member::GetName()
-{
-    return name;
-}
-
-string member::GetNumber()
-{
-    return number;
-}
-
-bool member::GetType()
-{
-    return memType;
-}
-
-float member::GetSpent()
-{
-    return totalSpent;
-}
-
-void member::Expiration(SalesDay a)
+void member::Expiration(string a)
 {
     char b;
     string today;
@@ -120,7 +109,7 @@ void member::Expiration(SalesDay a)
     int month1;
     int month2;
 
-    today = a.GetDate();
+    today = a;
 
     b = expiration[0];
     m1 = b;
@@ -200,6 +189,51 @@ void member::Renew()
     expiration[9] = m;
 }
 
+string member::GetName()
+{
+    return name;
+}
+
+string member::GetNumber()
+{
+    return number;
+}
+
+bool member::GetType()
+{
+    return memType;
+}
+
+float member::GetSpent()
+{
+    return totalSpent;
+}
+
+float member::GetTaxSpent()
+{
+    return totalTax;
+}
+
+member *member::GetNextMember()
+{
+    return nextMember;
+}
+
+Purchase *member::GetFirstPurchase()
+{
+    return firstPurchase;
+}
+
+Purchase *member::GetLastPurchase()
+{
+    return lastPurchase;
+}
+
+void ExecClass::CalcRebate()
+{
+    rebate = REBATE_RATE * GetSpent();
+}
+
 void ExecClass::AdjustType()
 {
     bool type;
@@ -248,22 +282,7 @@ void ExecClass::ChangeMembership()
     }
 }
 
-member *member::GetNextMember()
+float ExecClass::GetRebate()
 {
-    return nextMember;
-}
-
-Purchase *member::GetFirstPurchase()
-{
-        return firstPurchase;
-}
-
-Purchase *member::GetLastPurchase()
-{
-        return lastPurchase;
-}
-
-void ExecClass::SetRebate(float newRebate)
-{
-    rebate = newRebate;
+    return rebate;
 }

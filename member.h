@@ -26,20 +26,8 @@ private:
 public:
     member();
     member(string iName, string iNumber, bool iMemType, float iTotalSpent, member *iNextMember, Purchase *iFirstPurchase, Purchase *iLastPurchase);
-    void SetName(string newName);
-    void SetNumber(string newNum);
-    void SetType(bool newType);
-    void SetSpent(float newSpent);
-    void CalcTotalSpent(); //Get total spent
-    void CalcTotalTax(); //Get total spent with tax
-    void SetNextMember(member *newNextMember);
-    void SetFirstPurchase(Purchase *newPurch);
-    void SetLastPurchase(Purchase *newPurch);
-    virtual void AddPurchase(Purchase *a);
-    void Expiration(string today);
-    void Renew();
-    void ChangeMembership();
 
+    //accessors
     string GetName();
     string GetNumber();
     bool GetType();
@@ -48,7 +36,33 @@ public:
     member *GetNextMember();
     Purchase *GetFirstPurchase();
     Purchase *GetLastPurchase();
+
     member *GetThisMember(string findNum); //call this from memList
+
+    //mutators
+    void SetName(string newName);
+    void SetNumber(string newNum);
+    void SetType(bool newType);
+    void ChangeMembership();
+    void Renew();
+    void Renew(string newDate); //aka set new expiration date
+    void SetSpent(float newSpent);
+    void SetNextMember(member *newNextMember);
+    void SetFirstPurchase(Purchase *newPurch);
+    void SetLastPurchase(Purchase *newPurch);
+
+    void PayTax(float receit);
+    void SpendMoney(Purchase *purch);
+    virtual void AddPurchase(Purchase *a);
+
+    //other methods
+    void CalcTotalSpent(); //Get total spent
+    void CalcTotalTax(); //Get total spent with tax
+    void Expiration(string today);
+    virtual void AdjustType();
+
+    //destructor
+    virtual ~member();
 };
 
 class ExecClass:public member
@@ -57,11 +71,14 @@ private:
     float rebate;
 
 public:
+    ExecClass();
+
     float GetRebate();
     void SetRebate(float newRebate);
     void AddRebate(Purchase *purch);
-    void AdjustType();
+    virtual void AdjustType();
     virtual void AddPurchase(Purchase *a);
+    virtual ~ExecClass();
 };
 
 #endif // MEMBER_H

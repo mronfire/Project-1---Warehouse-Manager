@@ -16,6 +16,12 @@ member::member(string iName, string iNumber, bool iMemType, float iTotalSpent, m
     lastPurchase = iLastPurchase;
 }
 
+ExecClass::ExecClass():member()
+{
+    SetType(true); //sets to executive member
+    rebate = 0;
+}
+
 void member::SetName(string newName)
 {
     name = newName;
@@ -175,6 +181,11 @@ void member::Renew()
     expiration[9] = m;
 }
 
+void member::Renew(string newDate)
+{
+    expiration = newDate;
+}
+
 void member::AddPurchase(Purchase *a)
 {
     if(firstPurchase == NULL) //if nothing in the list
@@ -186,6 +197,8 @@ void member::AddPurchase(Purchase *a)
         lastPurchase->setNextMember(a); //add to back of list
     }
     lastPurchase = a;
+
+    SpendMoney(a);
 }
 
 void ExecClass::AddPurchase(Purchase *a)
@@ -200,6 +213,7 @@ void ExecClass::AddPurchase(Purchase *a)
     }
     SetLastPurchase(a);
 
+    SpendMoney(a);
     AddRebate(a);
 }
 
@@ -287,39 +301,39 @@ void ExecClass::AddRebate(Purchase *purch)
     rebate += receit * REBATE_RATE;
 }
 
-void ExecClass::AdjustType()
+void member::AdjustType()
 {
-    bool type;
     float mem, ex;
 
     mem = 85 + GetSpent();
-    ex = 95 + GetSpent() - (rebate * GetSpent());
+    ex = 95 + GetSpent() - (REBATE_RATE * GetSpent());
 
-    type = GetType();
-
-    if(type == EXEC)
+    if(mem < ex)
     {
-        if(mem < ex)
-        {
-            cout << "You should consider switching to a regular membership!\n";
-            ChangeMembership();
-        }
-        else
-        {
-            cout << "You should maintain your executive membership.";
-        }
+        cout << "You should maintain your regular membership";
     }
     else
     {
-        if(mem < ex)
-        {
-            cout << "You should maintain your regular membership";
-        }
-        else
-        {
-            cout << "You should upgrade your membership!";
-            ChangeMembership();
-        }
+        cout << "You should upgrade your membership!";
+        ChangeMembership();
+    }
+}
+
+void ExecClass::AdjustType()
+{
+    float mem, ex;
+
+    mem = 85 + GetSpent();
+    ex = 95 + GetSpent() - rebate;
+
+    if(mem < ex)
+    {
+        cout << "You should consider switching to a regular membership!\n";
+        ChangeMembership();
+    }
+    else
+    {
+        cout << "You should maintain your executive membership.";
     }
 }
 
@@ -335,13 +349,29 @@ void member::ChangeMembership()
     }
 }
 
+void member::SpendMoney(Purchase *purch)
+{
+    float receit;
+    receit = purch->getObjPrice() * purch->getObjQuantity();
+    totalSpent += receit;
+    receit += receit * TAX_RATE;
+    PayTax(receit); //total tax money spent after tax
+}
 
+void member::PayTax(float receit)
+{
+    totalTax += receit;
+}
 
+member::~member()
+{
 
+}
 
+ExecClass::~ExecClass()
+{
 
-
-
+}
 
 
 

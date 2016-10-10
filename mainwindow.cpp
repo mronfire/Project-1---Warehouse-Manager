@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -13,12 +14,29 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_pushButton_clicked()
+void MainWindow::on_loginButton_clicked()
 {
-    ui->label->setText("No Seriously get out of here");
-}
+    QString username, password;
 
-void MainWindow::on_pushButton_2_clicked()
-{
-    this->close();
+    username = ui->Edituser->text();
+    password = ui->Editpassword->text();
+
+    if(username == "Admin" || username == "admin")
+    {
+        if(password == "admin" || password == "password")
+        {
+            this->hide();
+            UserWindow userInfo;
+            userInfo.setModal(true);
+            userInfo.exec();
+        }
+        else
+        {
+            QMessageBox::information(this, "Login", "Usename or password is not correct!");
+        }
+    }
+    else
+    {
+        QMessageBox::information(this, "Login", "Usename or password is not correct!");
+    }
 }

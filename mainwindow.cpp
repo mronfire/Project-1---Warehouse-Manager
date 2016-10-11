@@ -40,3 +40,8 @@ void MainWindow::on_loginButton_clicked()
         QMessageBox::information(this, "Login", "Usename or password is not correct!");
     }
 }
+
+void MainWindow::on_pushButton_clicked()
+{
+    this->close();
+}

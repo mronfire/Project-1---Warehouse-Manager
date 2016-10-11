@@ -16,6 +16,7 @@ int main(int argc, char *argv[])
     memberList = CreateMemberList(memFile);
     dayList = CreateDayList(NUMDAYS, "08/01/2015");
     ReadPurchases(purchFile ,memberList, dayList);
+    SaveData(memFile, purchFile, memberList, dayList);
     cout << DeleteMembers(memberList); //always delete members before days!
     cout << DeleteDays(dayList);
     cout << "\n\nYou have reached the end of the demo!\n";
@@ -26,3 +27,4 @@ int main(int argc, char *argv[])
 
     return a.exec();
 }
+

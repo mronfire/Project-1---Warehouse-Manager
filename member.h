@@ -25,12 +25,14 @@ private:
 
 public:
     member();
+    member(string iName, string iNum, bool iType, string iDate); //infile constructor
     member(string iName, string iNumber, bool iMemType, float iTotalSpent, member *iNextMember, Purchase *iFirstPurchase, Purchase *iLastPurchase);
 
     //accessors
     string GetName();
     string GetNumber();
     bool GetType();
+    string GetExpiration();
     float GetSpent();
     float GetTaxSpent();
     member *GetNextMember();
@@ -50,6 +52,7 @@ public:
     void SetNextMember(member *newNextMember);
     void SetFirstPurchase(Purchase *newPurch);
     void SetLastPurchase(Purchase *newPurch);
+    member *AddToMemberList(member *newMember);
 
     void PayTax(float receit);
     void SpendMoney(Purchase *purch);
@@ -72,6 +75,7 @@ private:
 
 public:
     ExecClass();
+    ExecClass(string iName, string iNum, bool iType, string iDate);
 
     float GetRebate();
     void SetRebate(float newRebate);

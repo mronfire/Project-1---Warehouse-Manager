@@ -3,51 +3,62 @@
 member *CreateMemberList(string inFile)
 {
     member *memberList;
-    member *memptr;
-    string line;
+    string name;
+    string memNum;
+    string isExec;
+    bool   ExecBool;
+    string date;
 
     ifstream memFile;
     memFile.open(inFile);
 
     if (memFile.is_open()) //create member list
     {
-        memberList = new member; //code is different: memlist should be 1st mem
-        memptr = memberList;
-        getline(memFile, line);
-        memptr->SetName(line);
-        getline(memFile,line);
-        memptr->SetNumber(line);
-        getline(memFile,line);
-        if(line == "Executive")
+        getline(memFile, name);
+        getline(memFile,memNum);
+        getline(memFile,isExec);
+        getline(memFile,date);
+        if(isExec == "Executive")
         {
-            memptr->SetType(true);
+            ExecBool = true;
         }
         else
         {
-            memptr->SetType(false);
+            ExecBool = false;
         }
-        getline(memFile,line);
-        //memptr->SetDate(line);
-        while(getline(memFile, line))
+
+        if(ExecBool)
         {
-            memptr->SetNextMember(new member);
-            memptr = memptr->GetNextMember();
-            memptr->SetName(line);
-            getline(memFile,line);
-            memptr->SetNumber(line);
-            getline(memFile,line);
-            if(line == "Executive")
+            memberList = new ExecClass(name, memNum, ExecBool, date);
+        }
+        else
+        {
+            memberList = new member(name, memNum, ExecBool, date);
+        }
+
+        while(getline(memFile, name))//code is different: memlist should be 1st mem
+        {
+            getline(memFile,memNum);
+            getline(memFile,isExec);
+            getline(memFile,date);
+            if(isExec == "Executive")
             {
-                memptr->SetType(true);
+                ExecBool = true;
             }
             else
             {
-                memptr->SetType(false);
+                ExecBool = false;
             }
-            getline(memFile,line);
-            //memptr->SetDate(line);
-        }
 
+            if(ExecBool)
+            {
+                memberList->AddToMemberList(new ExecClass(name, memNum, ExecBool, date));
+            }
+            else
+            {
+                memberList->AddToMemberList(new member(name, memNum, ExecBool, date));
+            }
+        }
     }
     memFile.close();
     cout << "Done loading members!\n";
@@ -222,4 +233,50 @@ string DeleteDays(SalesDay *dayList)
     return output.str();
 }
 
-//void SaveData(string memFile, string purchFile, member *memberList, SalesDay dayList);
+void SaveData(string memFileName, string purchFileName, member *memberList, SalesDay *dayList)
+{
+    member *memptr = memberList;
+    SalesDay *dayptr = dayList;
+    Purchase *purchptr;
+
+    ofstream memFile;
+    ofstream purchFile;
+    memFile.open(memFileName);
+
+    while(memptr != NULL)
+    {
+        memFile << memptr->GetName() << endl
+                << memptr->GetNumber() << endl;
+        if(memptr->GetType()) //true is exec
+        {
+            memFile << "Executive\n";
+        }
+        else
+        {
+            memFile << "Regular\n";
+        }
+        memFile << memptr->GetExpiration() << endl;
+        memptr = memptr->GetNextMember();
+    }
+    memFile.close();
+
+    purchFile.open(purchFileName);
+
+    while(dayptr != NULL)
+    {
+        purchptr = dayptr->GetFirstPurchase();
+        while(purchptr != NULL)
+        {
+            purchFile << fixed << setprecision(2);
+            purchFile << purchptr->getPurchaseDate() << endl
+                      << purchptr->getMemberNum() << endl
+                      << purchptr->getObjType() << endl
+                      << purchptr->getObjPrice() << ' '
+                      << purchptr->getObjQuantity() << endl;
+            purchptr = purchptr->getNextDay(); //point to next purchase in day
+        }
+        dayptr = dayptr->GetNextDay();
+    }
+
+    purchFile.close();
+}

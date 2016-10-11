@@ -1,8 +1,23 @@
 #include "member.h"
 
-member::member(): name("BLANK"), number("00000"), memType(NORMAL), totalSpent(0), nextMember(NULL), firstPurchase(NULL), lastPurchase(NULL)
+member::member(): name("BLANK"), number("00000"), memType(NORMAL), totalSpent(0),
+                  totalTax(0), expiration("01/01/2020"), nextMember(NULL),
+                  firstPurchase(NULL), lastPurchase(NULL)
 {
 
+}
+
+member::member(string iName, string iNum, bool iType, string iDate)
+{
+    name = iName;
+    number = iNum;
+    memType = iType;
+    expiration = iDate;
+    totalSpent = 0;
+    totalTax = 0;
+    nextMember = NULL;
+    firstPurchase = NULL;
+    lastPurchase = NULL;
 }
 
 member::member(string iName, string iNumber, bool iMemType, float iTotalSpent, member *iNextMember, Purchase *iFirstPurchase, Purchase *iLastPurchase)
@@ -19,6 +34,12 @@ member::member(string iName, string iNumber, bool iMemType, float iTotalSpent, m
 ExecClass::ExecClass():member()
 {
     SetType(true); //sets to executive member
+    rebate = 0;
+}
+
+ExecClass::ExecClass(string iName, string iNum, bool iType, string iDate)
+            :member(iName, iNum, iType, iDate)
+{
     rebate = 0;
 }
 
@@ -186,6 +207,20 @@ void member::Renew(string newDate)
     expiration = newDate;
 }
 
+member *member::AddToMemberList(member *newMember)
+{
+    if(nextMember == NULL)//if last item in list
+    {
+        nextMember = newMember;
+    }
+    else
+    {
+        nextMember->AddToMemberList(newMember);
+    }
+
+    return newMember; //returns so we can put get adress of last in list
+}
+
 void member::AddPurchase(Purchase *a)
 {
     if(firstPurchase == NULL) //if nothing in the list
@@ -230,6 +265,11 @@ string member::GetNumber()
 bool member::GetType()
 {
     return memType;
+}
+
+string member::GetExpiration()
+{
+    return expiration;
 }
 
 float member::GetSpent()

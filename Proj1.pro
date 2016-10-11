@@ -17,17 +17,21 @@ SOURCES += main.cpp\
     sales.cpp \
     purchase.cpp \
     member.cpp \
-    fileparsing.cpp
+    fileparsing.cpp \
+    userwindow.cpp
 
 HEADERS  += mainwindow.h \
     header.h \
     purchase.h \
     sales.h \
     member.h \
-    fileparsing.h
+    fileparsing.h \
+    userwindow.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+	userwindow.ui
 
 DISTFILES += \
     members.txt \
-    purchases.txt
+    purchases.txt \
+	myresources.qrc

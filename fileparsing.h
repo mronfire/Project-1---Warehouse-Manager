@@ -11,7 +11,7 @@ SalesDay *CreateDayList(int numDays, string day1);
 void ReadPurchases(string inFile, member *memberList, SalesDay *dayList);
 string DeleteMembers(member *memberList);
 string DeleteDays(SalesDay *dayList);
-//void SaveData(string memFile, string purchFile, member *memberList, SalesDay dayList);
+void SaveData(string memFileName, string purchFileName, member *memberList, SalesDay *dayList);
 
 
 #endif // FILEPARSING_H

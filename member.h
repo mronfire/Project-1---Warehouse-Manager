@@ -13,10 +13,10 @@ const float REBATE_RATE = 0.0325;
 class member
 {
 private:
-    string name; //Member name
-    string number; //Member number
+    QString name; //Member name
+    QString number; //Member number
     bool memType; //True if exec, false if normal member
-    string expiration;
+    QString expiration;
     float totalSpent; //Total money spent by member
     float totalTax; //Total money spent by member after tax
     member *nextMember;
@@ -25,29 +25,29 @@ private:
 
 public:
     member();
-    member(string iName, string iNum, bool iType, string iDate); //infile constructor
-    member(string iName, string iNumber, bool iMemType, float iTotalSpent, member *iNextMember, Purchase *iFirstPurchase, Purchase *iLastPurchase);
+    member(QString iName, QString iNum, bool iType, QString iDate); //infile constructor
+    member(QString iName, QString iNumber, bool iMemType, float iTotalSpent, member *iNextMember, Purchase *iFirstPurchase, Purchase *iLastPurchase);
 
     //accessors
-    string GetName();
-    string GetNumber();
+    QString GetName();
+    QString GetNumber();
     bool GetType();
-    string GetExpiration();
+    QString GetExpiration();
     float GetSpent();
     float GetTaxSpent();
     member *GetNextMember();
     Purchase *GetFirstPurchase();
     Purchase *GetLastPurchase();
 
-    member *GetThisMember(string findNum); //call this from memList
+    member *GetThisMember(QString findNum); //call this from memList
 
     //mutators
-    void SetName(string newName);
-    void SetNumber(string newNum);
+    void SetName(QString newName);
+    void SetNumber(QString newNum);
     void SetType(bool newType);
     void ChangeMembership();
     void Renew();
-    void Renew(string newDate); //aka set new expiration date
+    void Renew(QString newDate); //aka set new expiration date
     void SetSpent(float newSpent);
     void SetNextMember(member *newNextMember);
     void SetFirstPurchase(Purchase *newPurch);
@@ -61,7 +61,7 @@ public:
     //other methods
     void CalcTotalSpent(); //Get total spent
     void CalcTotalTax(); //Get total spent with tax
-    void Expiration(string today);
+    void Expiration(QString today);
     virtual void AdjustType();
 
     //destructor
@@ -75,7 +75,7 @@ private:
 
 public:
     ExecClass();
-    ExecClass(string iName, string iNum, bool iType, string iDate);
+    ExecClass(QString iName, QString iNum, bool iType, QString iDate);
 
     float GetRebate();
     void SetRebate(float newRebate);

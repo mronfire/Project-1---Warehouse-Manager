@@ -17,19 +17,16 @@ SOURCES += main.cpp\
     sales.cpp \
     purchase.cpp \
     member.cpp \
-    fileparsing.cpp \
-    userwindow.cpp
+    fileparsing.cpp
 
 HEADERS  += mainwindow.h \
     header.h \
     purchase.h \
     sales.h \
     member.h \
-    fileparsing.h \
-    userwindow.h
+    fileparsing.h
 
-FORMS    += mainwindow.ui \
-	userwindow.ui
+FORMS    += mainwindow.ui
 
 DISTFILES += \
     members.txt \

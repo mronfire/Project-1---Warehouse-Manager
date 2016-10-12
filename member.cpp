@@ -7,7 +7,7 @@ member::member(): name("BLANK"), number("00000"), memType(NORMAL), totalSpent(0)
 
 }
 
-member::member(string iName, string iNum, bool iType, string iDate)
+member::member(QString iName, QString iNum, bool iType, QString iDate)
 {
     name = iName;
     number = iNum;
@@ -20,7 +20,7 @@ member::member(string iName, string iNum, bool iType, string iDate)
     lastPurchase = NULL;
 }
 
-member::member(string iName, string iNumber, bool iMemType, float iTotalSpent, member *iNextMember, Purchase *iFirstPurchase, Purchase *iLastPurchase)
+member::member(QString iName, QString iNumber, bool iMemType, float iTotalSpent, member *iNextMember, Purchase *iFirstPurchase, Purchase *iLastPurchase)
 {
     name = iName;
     number = iNumber;
@@ -37,18 +37,18 @@ ExecClass::ExecClass():member()
     rebate = 0;
 }
 
-ExecClass::ExecClass(string iName, string iNum, bool iType, string iDate)
+ExecClass::ExecClass(QString iName, QString iNum, bool iType, QString iDate)
             :member(iName, iNum, iType, iDate)
 {
     rebate = 0;
 }
 
-void member::SetName(string newName)
+void member::SetName(QString newName)
 {
     name = newName;
 }
 
-void member::SetNumber(string newNum)
+void member::SetNumber(QString newNum)
 {
     number = newNum;
 }
@@ -113,10 +113,10 @@ void member::CalcTotalTax()
     totalTax = totalSpent + tax;
 }
 
-void member::Expiration(string a)
+void member::Expiration(QString a)
 {
     char b;
-    string today;
+    QString today;
     int m1;
     int m2;
     int month1;
@@ -202,7 +202,7 @@ void member::Renew()
     expiration[9] = m;
 }
 
-void member::Renew(string newDate)
+void member::Renew(QString newDate)
 {
     expiration = newDate;
 }
@@ -252,12 +252,12 @@ void ExecClass::AddPurchase(Purchase *a)
     AddRebate(a);
 }
 
-string member::GetName()
+QString member::GetName()
 {
     return name;
 }
 
-string member::GetNumber()
+QString member::GetNumber()
 {
     return number;
 }
@@ -267,7 +267,7 @@ bool member::GetType()
     return memType;
 }
 
-string member::GetExpiration()
+QString member::GetExpiration()
 {
     return expiration;
 }
@@ -297,7 +297,7 @@ Purchase *member::GetLastPurchase()
         return lastPurchase;
 }
 
-member *member::GetThisMember(string findNum)
+member *member::GetThisMember(QString findNum)
 {
     member *memptr;
 

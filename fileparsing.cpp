@@ -1,13 +1,13 @@
 #include "fileparsing.h"
 
-member *CreateMemberList(string inFile)
+member *CreateMemberList(QString inFile)
 {
     member *memberList;
-    string name;
-    string memNum;
-    string isExec;
+    QString name;
+    QString memNum;
+    QString isExec;
     bool   ExecBool;
-    string date;
+    QString date;
 
     ifstream memFile;
     memFile.open(inFile);
@@ -66,7 +66,7 @@ member *CreateMemberList(string inFile)
     return memberList;
 }
 
-SalesDay *CreateDayList(int numDays, string day1)
+SalesDay *CreateDayList(int numDays, QString day1)
 {
     int index;
 
@@ -87,11 +87,11 @@ SalesDay *CreateDayList(int numDays, string day1)
     return dayList;
 }
 
-void ReadPurchases(string inFile, member *memberList, SalesDay *dayList)
+void ReadPurchases(QString inFile, member *memberList, SalesDay *dayList)
 {
-    string line;
-    string day;
-    string customer;
+    QString line;
+    QString day;
+    QString customer;
     int    amount;
     float  cost;
 
@@ -170,25 +170,25 @@ void ReadPurchases(string inFile, member *memberList, SalesDay *dayList)
     cout << "Done loading purchases!\n";
 }
 
-string DeleteMembers(member *memberList)
+void DeleteMembers(member *memberList)
 {
     //ALWAYS DELETE MEMBERS BEFORE DAYS
     member   *memptr;
     Purchase *purchptr;
 
-    ostringstream output;
+    //ostringstream output;
 
     memptr = memberList;
-    output << "\nMember list:\n";
+    cout << "\nMember list:\n";
     //delete all dynamically allocated memory
     while(memberList != NULL)
     {
-        output << "Member name: " << memberList->GetName() << endl;
-        output << "Member num : " << memberList->GetNumber() << endl;
+        cout << "Member name: " << memberList->GetName() << endl;
+        cout << "Member num : " << memberList->GetNumber() << endl;
 
         while(memptr->GetFirstPurchase() != NULL)
         {
-            output << " -" << memptr->GetFirstPurchase()->getObjType() << endl;
+            cout << " -" << memptr->GetFirstPurchase()->getObjType() << endl;
             purchptr = memptr->GetFirstPurchase()->getNextDay(); //point to next purchase in day
             memptr->SetFirstPurchase(purchptr);
         }
@@ -198,16 +198,16 @@ string DeleteMembers(member *memberList)
         memberList = memptr;
     }
 
-    return output.str();
+    //return output.str();
 }
 
-string DeleteDays(SalesDay *dayList)
+void DeleteDays(SalesDay *dayList)
 {
     //ALWAYS DELETE MEMBERS BEFORE DAYS
     SalesDay *dayptr;
     Purchase *purchptr;
 
-    ostringstream output;
+    //ostringstream output;
 
     dayptr = dayList;
     cout << "\nDayList:\n";
@@ -230,10 +230,10 @@ string DeleteDays(SalesDay *dayList)
         dayList = dayptr;
     }
 
-    return output.str();
+    //return output.str();
 }
 
-void SaveData(string memFileName, string purchFileName, member *memberList, SalesDay *dayList)
+void SaveData(QString memFileName, QString purchFileName, member *memberList, SalesDay *dayList)
 {
     member *memptr = memberList;
     SalesDay *dayptr = dayList;

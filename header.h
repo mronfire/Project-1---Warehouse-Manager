@@ -9,6 +9,8 @@
 #include<sstream>
 #include<string>
 #include<QString>
+#include<QtDebug>
+#include<QFile>
 
 using namespace std;
 

@@ -11,21 +11,21 @@ private:
     float revenue;
     int numExec;
     int numMem;
-    string date;
+    QString date;
     SalesDay *tomorrow;
     Purchase *firstPurchase;
     Purchase *lastPurchase;
 public:
     SalesDay();
-    SalesDay(float initRevenue, int initExec, int initMem, std::string initDate, SalesDay *initTomorrow, Purchase *initFirst, Purchase *initLast);
+    SalesDay(float initRevenue, int initExec, int initMem, QString initDate, SalesDay *initTomorrow, Purchase *initFirst, Purchase *initLast);
     SalesDay(SalesDay *a);
     SalesDay *GetNextDay();
     Purchase *GetFirstPurchase();
-    string GetDate();
+    QString GetDate();
     int GetMem();
     int GetExec();
     float GetRevenue();
-    void SetDate(string today);
+    void SetDate(QString today);
     void IncreaseRevenue(int addRevenue);
     void MemberCount(bool member);
     void AddPurchase(Purchase *a, member *memList);

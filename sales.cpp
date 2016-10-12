@@ -12,7 +12,7 @@ SalesDay::SalesDay()
 
 }
 
-SalesDay::SalesDay(float initRevenue, int initExec, int initMem, std::string initDate, SalesDay *initTomorrow, Purchase *initFirst, Purchase *initLast)
+SalesDay::SalesDay(float initRevenue, int initExec, int initMem, QString initDate, SalesDay *initTomorrow, Purchase *initFirst, Purchase *initLast)
 {
     revenue = initRevenue;
     numExec = initExec;
@@ -25,7 +25,7 @@ SalesDay::SalesDay(float initRevenue, int initExec, int initMem, std::string ini
 
 SalesDay::SalesDay(SalesDay *a) //tommorow constructer
 {
-    string today = a->GetDate();
+    QString today = a->GetDate();
     int m1 = int(today.at(0)) - 48; //sets values to hold components of the date
     int m2 = int(today.at(1)) - 48; //ascii needs me to subtract 48 since we're
     int d1 = int(today.at(3)) - 48; //using chars technically
@@ -98,7 +98,7 @@ Purchase *SalesDay::GetFirstPurchase()
     return firstPurchase;
 }
 
-string SalesDay::GetDate()
+QString SalesDay::GetDate()
 {
     return date;
 }
@@ -118,7 +118,7 @@ float SalesDay::GetRevenue()
     return revenue;
 }
 
-void SalesDay::SetDate(string today)
+void SalesDay::SetDate(QString today)
 {
     date = today;
 }

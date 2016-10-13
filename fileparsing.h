@@ -6,12 +6,12 @@
 #include "sales.h"
 #include "member.h"
 
-member *CreateMemberList(string inFile);
-SalesDay *CreateDayList(int numDays, string day1);
-void ReadPurchases(string inFile, member *memberList, SalesDay *dayList);
-string DeleteMembers(member *memberList);
-string DeleteDays(SalesDay *dayList);
-void SaveData(string memFileName, string purchFileName, member *memberList, SalesDay *dayList);
+member *CreateMemberList(QString inFile);
+SalesDay *CreateDayList(int numDays, QString day1);
+void ReadPurchases(QString inFile, member *memberList, SalesDay *dayList);
+void DeleteMembers(member *memberList);
+void DeleteDays(SalesDay *dayList);
+void SaveData(QString memFileName, QString purchFileName, member *memberList, SalesDay *dayList);
 
 
 #endif // FILEPARSING_H

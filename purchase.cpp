@@ -11,8 +11,8 @@ Purchase::Purchase()
     nextDay       = NULL;
 }
 
-Purchase::Purchase(string num, string type, float cost, int amount,
-                             string date)
+Purchase::Purchase(QString num, QString type, float cost, int amount,
+                             QString date)
 {
     memberNum    = num;
     objectType   = type;
@@ -23,12 +23,12 @@ Purchase::Purchase(string num, string type, float cost, int amount,
     nextDay      = NULL;
 }
 
-void Purchase::setMemberNum(string num)
+void Purchase::setMemberNum(QString num)
 {
     memberNum = num;
 }
 
-void Purchase::setObjType(string type)
+void Purchase::setObjType(QString type)
 {
     objectType = type;
 }
@@ -43,7 +43,7 @@ void Purchase::setObjQuantity(int amount)
     quantity = amount;
 }
 
-void Purchase::setPurchaseDate(string date)
+void Purchase::setPurchaseDate(QString date)
 {
     purchaseDate = date;
 }
@@ -58,12 +58,12 @@ void Purchase::setNextDay(Purchase *otherDay)
     nextDay = otherDay;
 }
 
-string Purchase::getMemberNum() const
+QString Purchase::getMemberNum() const
 {
     return memberNum;
 }
 
-string Purchase::getObjType() const
+QString Purchase::getObjType() const
 {
     return objectType;
 }
@@ -78,7 +78,7 @@ int Purchase::getObjQuantity() const
     return quantity;
 }
 
-string Purchase::getPurchaseDate() const
+QString Purchase::getPurchaseDate() const
 {
     return purchaseDate;
 }

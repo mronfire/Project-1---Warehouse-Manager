@@ -1,23 +1,27 @@
 #include "fileparsing.h"
 
-member *CreateMemberList(string inFile)
+member *CreateMemberList(QString inFile)
 {
     member *memberList;
-    string name;
-    string memNum;
-    string isExec;
+    QString name;
+    QString memNum;
+    QString isExec;
     bool   ExecBool;
-    string date;
+    QString date;
 
-    ifstream memFile;
-    memFile.open(inFile);
+    QFile memFile(inFile);
+    memFile.open(QIODevice::ReadOnly | QIODevice::Text);
 
-    if (memFile.is_open()) //create member list
+    if(true) //create member list //this line was .isopen
     {
-        getline(memFile, name);
-        getline(memFile,memNum);
-        getline(memFile,isExec);
-        getline(memFile,date);
+        name = memFile.readLine();
+        name = name.left(name.length() - 1);
+        memNum = memFile.readLine();
+        memNum = memNum.left(memNum.length() - 1);
+        isExec = memFile.readLine();
+        isExec = isExec.left(isExec.length() - 1);
+        date = memFile.readLine();
+        date = date.left(date.length() - 1);
         if(isExec == "Executive")
         {
             ExecBool = true;
@@ -36,11 +40,16 @@ member *CreateMemberList(string inFile)
             memberList = new member(name, memNum, ExecBool, date);
         }
 
-        while(getline(memFile, name))//code is different: memlist should be 1st mem
+        while(!memFile.atEnd())//code is different: memlist should be 1st mem
         {
-            getline(memFile,memNum);
-            getline(memFile,isExec);
-            getline(memFile,date);
+            name = memFile.readLine();
+            name = name.left(name.length() - 1);
+            memNum = memFile.readLine();
+            memNum = memNum.left(memNum.length() - 1);
+            isExec = memFile.readLine();
+            isExec = isExec.left(isExec.length() - 1);
+            date = memFile.readLine();
+            date = date.left(date.length() - 1);
             if(isExec == "Executive")
             {
                 ExecBool = true;
@@ -66,7 +75,7 @@ member *CreateMemberList(string inFile)
     return memberList;
 }
 
-SalesDay *CreateDayList(int numDays, string day1)
+SalesDay *CreateDayList(int numDays, QString day1)
 {
     int index;
 
@@ -87,11 +96,12 @@ SalesDay *CreateDayList(int numDays, string day1)
     return dayList;
 }
 
-void ReadPurchases(string inFile, member *memberList, SalesDay *dayList)
+void ReadPurchases(QString inFile, member *memberList, SalesDay *dayList)
 {
-    string line;
-    string day;
-    string customer;
+    QString day;
+    QString customer;
+    QString obj;
+    QString line;
     int    amount;
     float  cost;
 
@@ -99,36 +109,42 @@ void ReadPurchases(string inFile, member *memberList, SalesDay *dayList)
     SalesDay *dayptr;
     member   *memptr;
 
-    ifstream purchFile;
-    purchFile.open(inFile);
+    QFile purchFile(inFile);
+    purchFile.open(QIODevice::ReadOnly | QIODevice::Text);
 
-    if(purchFile.is_open())
+    if(true) //qfile has no .isOpen
     {
-        while(getline(purchFile, line))
+        while(!purchFile.atEnd())
         {
             //generate new purchase
             purchptr = new Purchase;
-            purchptr->setPurchaseDate(line);
-            day = line;
-            getline(purchFile, line);
-            purchptr->setMemberNum(line);
-            customer = line;
-            getline(purchFile, line);
-            purchptr->setObjType(line);
-            purchFile>>cost;
+            day = purchFile.readLine();
+            day = day.left(day.length() - 1); //gets rid of white space
+            customer = purchFile.readLine();
+            customer = customer.left(customer.length() - 1); //same
+            obj =  purchFile.readLine();
+            obj = obj.left(obj.length() - 1); //same
+            line = purchFile.readLine(); //reads into line, chops off white space, then typecasts properly
+            line = line.left(line.length() - 1);
+            cost = line.toFloat();
+            line = purchFile.readLine();
+            line = line.left(line.length() - 1);
+            amount = line.toInt();
+
+            purchptr->setPurchaseDate(day);
+            purchptr->setMemberNum(customer);
+            purchptr->setObjType(obj);
             purchptr->setObjPrice(cost);
-            purchFile>>amount;
             purchptr->setObjQuantity(amount);
-            purchFile.ignore(1,'\n');
 
             //find and assign day
             dayptr = dayList;
             while(day != dayptr->GetDate() && dayptr->GetDate() != "Other" && dayptr != NULL)
-            {
+            {              //ptr->method.function is correct here
                 dayptr = dayptr->GetNextDay();
                 while(dayptr == NULL) //this should never run
                 {
-                    cout << "oob";
+                    cout << "day oob";
                     cin.ignore(9001,'\n');
                 } //waits so the program no asplode
             }
@@ -149,7 +165,7 @@ void ReadPurchases(string inFile, member *memberList, SalesDay *dayList)
                 memptr = memptr->GetNextMember();
                 while(memptr == NULL) //this should never run
                 {
-                    cout << "oob";
+                    cout << "member oob";
                     cin.ignore(9001,'\n');
                 } //waits so the program no asplode
             }
@@ -160,7 +176,7 @@ void ReadPurchases(string inFile, member *memberList, SalesDay *dayList)
             }
             else //if this runs, we're not pointing to a member
             {
-                cout << customer << " IS NOT A CLAIMED MEMBER NUMBER\n";
+                cout << customer.toStdString() << " IS NOT A CLAIMED MEMBER NUMBER\n";
             }
         }
     }
@@ -170,25 +186,27 @@ void ReadPurchases(string inFile, member *memberList, SalesDay *dayList)
     cout << "Done loading purchases!\n";
 }
 
-string DeleteMembers(member *memberList)
+void DeleteMembers(member *memberList)
 {
     //ALWAYS DELETE MEMBERS BEFORE DAYS
     member   *memptr;
     Purchase *purchptr;
 
-    ostringstream output;
+    //ostringstream output;
 
     memptr = memberList;
-    output << "\nMember list:\n";
+    cout << "\nMember list:\n";
     //delete all dynamically allocated memory
     while(memberList != NULL)
     {
-        output << "Member name: " << memberList->GetName() << endl;
-        output << "Member num : " << memberList->GetNumber() << endl;
+        cout << "Member name : " << memberList->GetName().toStdString() << endl;
+        cout << "Member num  : " << memberList->GetNumber().toStdString() << endl;
+        cout << fixed << setprecision(2);
+        cout << "Member spent: $" << memberList->GetSpent() << endl;
 
         while(memptr->GetFirstPurchase() != NULL)
         {
-            output << " -" << memptr->GetFirstPurchase()->getObjType() << endl;
+            cout << " -" << memptr->GetFirstPurchase()->getObjType().toStdString() << endl;
             purchptr = memptr->GetFirstPurchase()->getNextDay(); //point to next purchase in day
             memptr->SetFirstPurchase(purchptr);
         }
@@ -198,29 +216,29 @@ string DeleteMembers(member *memberList)
         memberList = memptr;
     }
 
-    return output.str();
+    //return output.str();
 }
 
-string DeleteDays(SalesDay *dayList)
+void DeleteDays(SalesDay *dayList)
 {
     //ALWAYS DELETE MEMBERS BEFORE DAYS
     SalesDay *dayptr;
     Purchase *purchptr;
 
-    ostringstream output;
+    //ostringstream output;
 
     dayptr = dayList;
     cout << "\nDayList:\n";
 
     while(dayList != NULL) //day is on charge of deallocating purchases
     {
-        cout << "Sales Date: " << dayList->GetDate() << endl;
+        cout << "Sales Date: " << dayList->GetDate().toStdString() << endl;
         cout << "Total Revenue: $" << dayList->GetRevenue() << endl;
         cout << "Total Regular Members: " << dayList->GetMem() << endl;
         cout << "Total Executive Members: " << dayList->GetExec() << endl;
         while(dayptr->GetFirstPurchase() != NULL)
         {
-            cout << " -" << dayptr->GetFirstPurchase()->getObjType() << endl;
+            cout << " -" << dayptr->GetFirstPurchase()->getObjType().toStdString() << endl;
             purchptr = dayptr->GetFirstPurchase()->getNextDay(); //point to next purchase in day
             delete dayptr->GetFirstPurchase();
             dayptr->SetFirstPurchase(purchptr);
@@ -230,49 +248,52 @@ string DeleteDays(SalesDay *dayList)
         dayList = dayptr;
     }
 
-    return output.str();
+    //return output.str();
 }
 
-void SaveData(string memFileName, string purchFileName, member *memberList, SalesDay *dayList)
+void SaveData(QString memFileName, QString purchFileName, member *memberList, SalesDay *dayList)
 {
     member *memptr = memberList;
     SalesDay *dayptr = dayList;
     Purchase *purchptr;
 
-    ofstream memFile;
-    ofstream purchFile;
-    memFile.open(memFileName);
+    QFile memFile(memFileName);
+    QFile purchFile(purchFileName);
+
+    memFile.open(QIODevice::ReadWrite);
+    purchFile.open(QIODevice::ReadWrite);
+
+    QTextStream memStream(&memFile);
+    QTextStream purchStream(&purchFile);
 
     while(memptr != NULL)
     {
-        memFile << memptr->GetName() << endl
+        memStream << memptr->GetName() << endl
                 << memptr->GetNumber() << endl;
         if(memptr->GetType()) //true is exec
         {
-            memFile << "Executive\n";
+            memStream << "Executive\n";
         }
         else
         {
-            memFile << "Regular\n";
+            memStream << "Regular\n";
         }
-        memFile << memptr->GetExpiration() << endl;
+        memStream << memptr->GetExpiration() << endl;
         memptr = memptr->GetNextMember();
     }
     memFile.close();
-
-    purchFile.open(purchFileName);
 
     while(dayptr != NULL)
     {
         purchptr = dayptr->GetFirstPurchase();
         while(purchptr != NULL)
         {
-            purchFile << fixed << setprecision(2);
-            purchFile << purchptr->getPurchaseDate() << endl
-                      << purchptr->getMemberNum() << endl
-                      << purchptr->getObjType() << endl
-                      << purchptr->getObjPrice() << ' '
-                      << purchptr->getObjQuantity() << endl;
+            //purchStream << fixed << setprecision(2); //these might not work with QStream
+            purchStream << purchptr->getPurchaseDate() << endl
+                        << purchptr->getMemberNum() << endl
+                        << purchptr->getObjType() << endl
+                        << purchptr->getObjPrice() << endl
+                        << purchptr->getObjQuantity() << endl;
             purchptr = purchptr->getNextDay(); //point to next purchase in day
         }
         dayptr = dayptr->GetNextDay();

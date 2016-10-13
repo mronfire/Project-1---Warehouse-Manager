@@ -12,7 +12,7 @@ SalesDay::SalesDay()
 
 }
 
-SalesDay::SalesDay(float initRevenue, int initExec, int initMem, std::string initDate, SalesDay *initTomorrow, Purchase *initFirst, Purchase *initLast)
+SalesDay::SalesDay(float initRevenue, int initExec, int initMem, QString initDate, SalesDay *initTomorrow, Purchase *initFirst, Purchase *initLast)
 {
     revenue = initRevenue;
     numExec = initExec;
@@ -25,13 +25,13 @@ SalesDay::SalesDay(float initRevenue, int initExec, int initMem, std::string ini
 
 SalesDay::SalesDay(SalesDay *a) //tommorow constructer
 {
-    string today = a->GetDate();
-    int m1 = int(today.at(0)) - 48; //sets values to hold components of the date
-    int m2 = int(today.at(1)) - 48; //ascii needs me to subtract 48 since we're
-    int d1 = int(today.at(3)) - 48; //using chars technically
-    int d2 = int(today.at(4)) - 48;
-    int y3 = int(today.at(8)) - 48;
-    int y4 = int(today.at(9)) - 48;
+    QString today = a->GetDate();
+    qint32 m1 = today.at(0).digitValue(); //sets values to hold components of the date
+    qint32 m2 = today.at(1).digitValue(); //ascii needs me to subtract 48 since we're
+    qint32 d1 = today.at(3).digitValue(); //using chars technically
+    qint32 d2 = today.at(4).digitValue();
+    qint32 y3 = today.at(8).digitValue();
+    qint32 y4 = today.at(9).digitValue();
     ostringstream tommorow;
 
     if(d2 == 9)
@@ -79,7 +79,7 @@ SalesDay::SalesDay(SalesDay *a) //tommorow constructer
 
     tommorow << m1 << m2 << '/' << d1 << d2 << "/20" << y3 << y4;
 
-    date = tommorow.str();
+    date = QString::fromStdString(tommorow.str()); //TYPE CASTING
     numExec = 0;
     numMem = 0;
     revenue = 0;
@@ -98,7 +98,7 @@ Purchase *SalesDay::GetFirstPurchase()
     return firstPurchase;
 }
 
-string SalesDay::GetDate()
+QString SalesDay::GetDate()
 {
     return date;
 }
@@ -118,7 +118,7 @@ float SalesDay::GetRevenue()
     return revenue;
 }
 
-void SalesDay::SetDate(string today)
+void SalesDay::SetDate(QString today)
 {
     date = today;
 }

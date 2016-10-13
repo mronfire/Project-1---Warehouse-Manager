@@ -7,7 +7,7 @@ member::member(): name("BLANK"), number("00000"), memType(NORMAL), totalSpent(0)
 
 }
 
-member::member(string iName, string iNum, bool iType, string iDate)
+member::member(QString iName, QString iNum, bool iType, QString iDate)
 {
     name = iName;
     number = iNum;
@@ -20,7 +20,7 @@ member::member(string iName, string iNum, bool iType, string iDate)
     lastPurchase = NULL;
 }
 
-member::member(string iName, string iNumber, bool iMemType, float iTotalSpent, member *iNextMember, Purchase *iFirstPurchase, Purchase *iLastPurchase)
+member::member(QString iName, QString iNumber, bool iMemType, float iTotalSpent, member *iNextMember, Purchase *iFirstPurchase, Purchase *iLastPurchase)
 {
     name = iName;
     number = iNumber;
@@ -37,18 +37,18 @@ ExecClass::ExecClass():member()
     rebate = 0;
 }
 
-ExecClass::ExecClass(string iName, string iNum, bool iType, string iDate)
+ExecClass::ExecClass(QString iName, QString iNum, bool iType, QString iDate)
             :member(iName, iNum, iType, iDate)
 {
     rebate = 0;
 }
 
-void member::SetName(string newName)
+void member::SetName(QString newName)
 {
     name = newName;
 }
 
-void member::SetNumber(string newNum)
+void member::SetNumber(QString newNum)
 {
     number = newNum;
 }
@@ -113,36 +113,29 @@ void member::CalcTotalTax()
     totalTax = totalSpent + tax;
 }
 
-void member::Expiration(string a)
+void member::Expiration(QString a)
 {
-    char b;
-    string today;
-    int m1;
-    int m2;
-    int month1;
-    int month2;
+    QChar b;
+    QString today;
+    qint32 m1;
+    qint32 m2;
+    qint32 month1;
+    qint32 month2;
 
     today = a;
 
-    b = expiration[0];
-    m1 = b;
-
-    b = expiration[1];
-    m2 = b;
+    m1 = expiration.at(0).digitValue();
+    m2 = expiration.at(1).digitValue();
     month1 = (m1 * 10) + m2;
 
-    b = today[0];
-    m1 = b;
-
-    b = today[1];
-    m2 = b;
-
+    m1 = today.at(0).digitValue();
+    m2 = today.at(1).digitValue();
     month2 = (m1 * 10) + m2;
 
     if(month1 == month2 && expiration[9] == today[9])
     {
         cout << "Your membership expires this month!\n" << "Would you like to renew your membership?";
-        cin.get(b);
+        //cin.get(b); //Can't get from console. Assign to buttons.
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
         if(b == 'y' || b == 'Y')
@@ -162,10 +155,10 @@ void member::Renew()
     int y1, y2, y3, y4;
     char m;
 
-    y1 = expiration[6];
-    y2 = expiration[7];
-    y3 = expiration[8];
-    y4 = expiration[9];
+    y1 = expiration.at(6).digitValue();
+    y2 = expiration.at(7).digitValue();
+    y3 = expiration.at(8).digitValue();
+    y4 = expiration.at(9).digitValue();
 
     if(y4 == 9)
     {
@@ -202,7 +195,7 @@ void member::Renew()
     expiration[9] = m;
 }
 
-void member::Renew(string newDate)
+void member::Renew(QString newDate)
 {
     expiration = newDate;
 }
@@ -252,12 +245,12 @@ void ExecClass::AddPurchase(Purchase *a)
     AddRebate(a);
 }
 
-string member::GetName()
+QString member::GetName()
 {
     return name;
 }
 
-string member::GetNumber()
+QString member::GetNumber()
 {
     return number;
 }
@@ -267,7 +260,7 @@ bool member::GetType()
     return memType;
 }
 
-string member::GetExpiration()
+QString member::GetExpiration()
 {
     return expiration;
 }
@@ -297,7 +290,7 @@ Purchase *member::GetLastPurchase()
         return lastPurchase;
 }
 
-member *member::GetThisMember(string findNum)
+member *member::GetThisMember(QString findNum)
 {
     member *memptr;
 

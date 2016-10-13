@@ -28,6 +28,7 @@ private slots:
     void on_addButton_clicked();                             //add member
     void on_removeButton_clicked();                          //remove member
     void on_viewButton_clicked();                            //view members
+    void on_pushButton_goBack_clicked();                     //takes you back to main menu
 
 private:
     Ui::MainWindow *ui;

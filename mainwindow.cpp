@@ -22,7 +22,7 @@ MainWindow::MainWindow(QWidget *parent) :
  */
 MainWindow::~MainWindow()
 {
-    SaveData(memFile, purchFile, memberList, dayList);
+    //SaveData(memFile, purchFile, memberList, dayList); //Out of order
     DeleteMembers(memberList); //always delete members before days!
     DeleteDays(dayList);
     delete ui;

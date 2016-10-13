@@ -85,7 +85,7 @@ void MainWindow::on_addButton_clicked()
     executive = ui->radioButton_execituveType;
     date      = ui->lineEdit_Date->text();
 
-    //work on this
+    //work on this***********************llllllalalalalal
     myMember->SetName(username);
     myMember->SetNumber(password);
     myMember->SetType(executive);
@@ -104,7 +104,8 @@ void MainWindow::on_addButton_clicked()
  */
 void MainWindow::on_removeButton_clicked()
 {
-    //work on this
+    //work on this******
+
 
 }
 
@@ -114,6 +115,13 @@ void MainWindow::on_removeButton_clicked()
  */
 void MainWindow::on_viewButton_clicked()
 {
-    //work on this
+    ui->stackedWidget->setCurrentWidget(ui->viewMembersPage);
+}
 
+/*
+ * This buttom will take you back to the main member page from the view member page
+ */
+void MainWindow::on_pushButton_goBack_clicked()
+{
+    ui->stackedWidget->setCurrentWidget(ui->memberPage);
 }

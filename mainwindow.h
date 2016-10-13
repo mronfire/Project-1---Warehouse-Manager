@@ -31,8 +31,8 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    QString memFile = "C:/Users/marod/Desktop/Project-1---T.E.A.M/members.txt";
-    QString purchFile = "C:/Users/marod/Desktop/Project-1---T.E.A.M/purchases.txt";
+    QString memFile = "C:/Users/mnelson39.SC-STUDENT/Desktop/Proj1/members.txt";
+    QString purchFile = "C:/Users/mnelson39.SC-STUDENT/Desktop/Proj1/purchases.txt";
 };
 
 #endif // MAINWINDOW_H

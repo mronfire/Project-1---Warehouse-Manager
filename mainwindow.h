@@ -35,6 +35,8 @@ private slots:
     void on_pushButton_generateList_clicked();       //this will generate the list of members
     void on_pushButton_generateSales_clicked();      //this will generate the sales report list
 
+    void on_pushButton_switchAccount_clicked();
+
 private:
     Ui::MainWindow *ui;
     QString memFile = "C:/Users/marod/Desktop/Project-1---T.E.A.M-master/members.txt";

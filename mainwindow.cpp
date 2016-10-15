@@ -75,14 +75,25 @@ void MainWindow::on_closeButton_clicked()
 void MainWindow::on_addButton_clicked()
 {
     QString username, numID, date;
-    bool    executive;
     member *myMember = NULL;
 
     myMember = new member;
 
     username  = ui->lineEdit_username->text();
     numID     = ui->lineEdit_numberID->text();
-    executive = ui->radioButton_execituveType; //not sure how radio buttom works
+    ui->radioButton_execituveType->toggled(true);
+
+    if(ui->radioButton_execituveType->isChecked())
+    {
+        QMessageBox::information(this, "Title", "The member is executive!!"); //just for testing
+        myMember->SetType(true);
+    }
+    else
+    {
+        QMessageBox::information(this, "Title", "The member is NOT executive!!"); //just for testing
+        myMember->SetType(false);
+    }
+
     date      = ui->lineEdit_Date->text();
 
     if(username == NULL || numID == NULL || date == NULL)
@@ -95,7 +106,6 @@ void MainWindow::on_addButton_clicked()
         //assign the member corresponding data
         myMember->SetName(username);
         myMember->SetNumber(numID);
-        myMember->SetType(executive);
         myMember->Renew(date);
 
         myMember->AddToMemberList(myMember); //adds member to list
@@ -104,6 +114,7 @@ void MainWindow::on_addButton_clicked()
                              "the list!");
     }
 
+    //clears the line edits for next input
     ui->lineEdit_username->clear();
     ui->lineEdit_numberID->clear();
     ui->lineEdit_Date->clear();
@@ -195,4 +206,14 @@ void MainWindow::on_pushButton_generateSales_clicked()
     {
         ui->listWidget_salesReport->addItem(QString::number(i + 1) + " add sales report here here!!!");
     }
+
+}
+
+/*
+ * This buttom will switch the members account, either to normal or executive member
+ */
+void MainWindow::on_pushButton_switchAccount_clicked()
+{
+    QListWidgetItem * item = ui->listWidget_members->currentItem();
+    item->setTextColor(Qt::red);
 }

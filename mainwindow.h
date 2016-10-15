@@ -33,6 +33,7 @@ private slots:
     void on_pushButton_goBacktoMenu_clicked();       //return to main menu from sales report
     void on_pushButton_2_salesReport_clicked();      //takes you to sales report page
     void on_pushButton_generateList_clicked();       //this will generate the list of members
+    void on_pushButton_generateSales_clicked();      //this will generate the sales report list
 
 private:
     Ui::MainWindow *ui;

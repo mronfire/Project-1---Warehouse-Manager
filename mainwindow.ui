@@ -24,7 +24,7 @@
     <item row="0" column="0">
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>4</number>
       </property>
       <widget class="QWidget" name="loginPage">
        <layout class="QGridLayout" name="gridLayout_4">
@@ -473,7 +473,7 @@
        <layout class="QGridLayout" name="gridLayout_11">
         <item row="0" column="0">
          <layout class="QGridLayout" name="gridLayout_10">
-          <item row="2" column="0">
+          <item row="3" column="0">
            <widget class="QPushButton" name="pushButton_goBacktoMenu">
             <property name="text">
              <string>Go Back</string>
@@ -495,6 +495,13 @@
             </property>
             <property name="text">
              <string>The Sales Report</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QPushButton" name="pushButton_generateSales">
+            <property name="text">
+             <string>Generate Sales Report</string>
             </property>
            </widget>
           </item>

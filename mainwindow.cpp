@@ -161,6 +161,8 @@ void MainWindow::on_pushButton_addMembers_clicked()
 void MainWindow::on_pushButton_goBacktoMenu_clicked()
 {
     ui->stackedWidget->setCurrentWidget(ui->menuPage);
+
+    ui->listWidget_salesReport->clear(); //clears the list widget
 }
 
 /*
@@ -176,8 +178,21 @@ void MainWindow::on_pushButton_2_salesReport_clicked()
  */
 void MainWindow::on_pushButton_generateList_clicked()
 {
+
     for(int i = 0; i < 10; i++)
     {
-        ui->listWidget_members->addItem(QString::number(i) + "member here!");
+        ui->listWidget_members->addItem(QString::number(i + 1) + " add member here!!!");
+    }
+}
+
+/*
+ * This buttom will generate the list of sales report and display it
+ */
+void MainWindow::on_pushButton_generateSales_clicked()
+{
+
+    for(int i = 0; i < 10; i++)
+    {
+        ui->listWidget_salesReport->addItem(QString::number(i + 1) + " add sales report here here!!!");
     }
 }

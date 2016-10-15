@@ -32,3 +32,5 @@ DISTFILES += \
     members.txt \
     purchases.txt \
 	myresources.qrc
+
+RESOURCES +=

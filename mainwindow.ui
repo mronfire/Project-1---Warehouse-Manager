@@ -24,7 +24,7 @@
     <item row="0" column="0">
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="loginPage">
        <layout class="QGridLayout" name="gridLayout_4">
@@ -142,6 +142,120 @@
             </property>
             <property name="styleSheet">
              <string notr="true"/>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="menuPage">
+       <layout class="QGridLayout" name="gridLayout_9">
+        <item row="1" column="0" colspan="4">
+         <layout class="QGridLayout" name="gridLayout_8">
+          <property name="sizeConstraint">
+           <enum>QLayout::SetDefaultConstraint</enum>
+          </property>
+          <item row="4" column="0">
+           <widget class="QLabel" name="label">
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>Please choose an option from the menu:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="0">
+           <widget class="QLabel" name="label_3_sales">
+            <property name="text">
+             <string>2 - Produce a Sales Report</string>
+            </property>
+           </widget>
+          </item>
+          <item row="8" column="0">
+           <widget class="QLabel" name="label_4">
+            <property name="text">
+             <string>3 - </string>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="0">
+           <widget class="QLabel" name="label_2_addMember">
+            <property name="text">
+             <string>1 - Add, Remove or View Members</string>
+            </property>
+           </widget>
+          </item>
+          <item row="9" column="1">
+           <spacer name="verticalSpacer_6">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="8" column="1">
+           <widget class="QPushButton" name="pushButton_3">
+            <property name="text">
+             <string>GO</string>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="1">
+           <widget class="QPushButton" name="pushButton_2_salesReport">
+            <property name="text">
+             <string>GO</string>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="1">
+           <widget class="QPushButton" name="pushButton_addMembers">
+            <property name="text">
+             <string>GO</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <spacer name="verticalSpacer_7">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_menuHeader">
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+              <weight>75</weight>
+              <bold>true</bold>
+              <underline>true</underline>
+             </font>
+            </property>
+            <property name="cursor">
+             <cursorShape>ArrowCursor</cursorShape>
+            </property>
+            <property name="layoutDirection">
+             <enum>Qt::LeftToRight</enum>
+            </property>
+            <property name="text">
+             <string>MAIN MENU</string>
             </property>
            </widget>
           </item>
@@ -297,6 +411,13 @@
             </property>
            </spacer>
           </item>
+          <item row="8" column="2">
+           <widget class="QPushButton" name="pushButton_returnToMenu">
+            <property name="text">
+             <string>Return to Main Menu</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </item>
        </layout>
@@ -305,24 +426,53 @@
        <layout class="QGridLayout" name="gridLayout_7">
         <item row="0" column="0">
          <layout class="QGridLayout" name="gridLayout_6">
-          <item row="2" column="0">
+          <item row="3" column="0">
            <widget class="QPushButton" name="pushButton_goBack">
             <property name="text">
              <string>Go back</string>
             </property>
            </widget>
           </item>
-          <item row="1" column="0">
+          <item row="2" column="0">
            <widget class="QPushButton" name="pushButton_switchAccount">
             <property name="text">
              <string>Switch Account</string>
             </property>
            </widget>
           </item>
-          <item row="0" column="0">
-           <widget class="QLabel" name="label_membersInfo">
+          <item row="1" column="0">
+           <widget class="QListWidget" name="listWidget_members"/>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="salesReportPage">
+       <layout class="QGridLayout" name="gridLayout_11">
+        <item row="0" column="0">
+         <layout class="QGridLayout" name="gridLayout_10">
+          <item row="2" column="0">
+           <widget class="QPushButton" name="pushButton_goBacktoMenu">
             <property name="text">
-             <string>Members Info</string>
+             <string>Go Back</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QListWidget" name="listWidget"/>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_2">
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+              <weight>75</weight>
+              <bold>true</bold>
+              <underline>true</underline>
+             </font>
+            </property>
+            <property name="text">
+             <string>The Sales Report</string>
             </property>
            </widget>
           </item>

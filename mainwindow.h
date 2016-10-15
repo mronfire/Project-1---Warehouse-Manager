@@ -6,7 +6,6 @@
 #include "sales.h"
 #include "member.h"
 #include "fileparsing.h"
-//#include "userwindow.h"
 
 namespace Ui {
 class MainWindow;
@@ -23,12 +22,16 @@ public:
     SalesDay *dayList;
 
 private slots:
-    void on_loginButton_clicked();                           //login buttom
-    void on_closeButton_clicked();                           //closes program
-    void on_addButton_clicked();                             //add member
-    void on_removeButton_clicked();                          //remove member
-    void on_viewButton_clicked();                            //view members
-    void on_pushButton_goBack_clicked();                     //takes you back to main menu
+    void on_loginButton_clicked();                   //login buttom
+    void on_closeButton_clicked();                   //closes program
+    void on_addButton_clicked();                     //add member
+    void on_removeButton_clicked();                  //remove member
+    void on_viewButton_clicked();                    //view members
+    void on_pushButton_goBack_clicked();             //takes you back to main menu
+    void on_pushButton_addMembers_clicked();         //takes you member page
+    void on_pushButton_returnToMenu_clicked();       //return to main menu from member page
+    void on_pushButton_goBacktoMenu_clicked();       //return to main menu from sales report
+    void on_pushButton_2_salesReport_clicked();      //takes you to sales report page
 
 private:
     Ui::MainWindow *ui;

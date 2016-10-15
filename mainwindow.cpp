@@ -44,10 +44,8 @@ void MainWindow::on_loginButton_clicked()
     {
         if(password == "admin" || password == "password")
         {
-            //instead of using different windows and adding more files to our
-            //project, i figure out how to work the stacked widget
-            ui->stackedWidget->setCurrentWidget(ui->memberPage);
-
+            //If username and password are correct, go to main menu
+            ui->stackedWidget->setCurrentWidget(ui->menuPage);
         }
         else
         {
@@ -56,7 +54,7 @@ void MainWindow::on_loginButton_clicked()
     }
     else
     {
-        QMessageBox::critical(this, "Login", "Usename is not correct!");
+        QMessageBox::critical(this, "Login", "Username is not correct!");
     }
 }
 
@@ -80,21 +78,31 @@ void MainWindow::on_addButton_clicked()
     bool    executive;
     member *myMember = NULL;
 
+    myMember = new member;
+
     username  = ui->lineEdit_username->text();
     password  = ui->lineEdit_numberID->text();
-    executive = ui->radioButton_execituveType;
+    executive = ui->radioButton_execituveType; //not sure how radio buttom works
     date      = ui->lineEdit_Date->text();
 
-    //work on this***********************llllllalalalalal
-    myMember->SetName(username);
-    myMember->SetNumber(password);
-    myMember->SetType(executive);
-    myMember->Renew(date);
+    if(username == NULL || password == NULL || date == NULL)
+    {
+        QMessageBox::critical(this, "List of Members", "Please fill in all the fields required"
+                              " in order to add a member!");
+    }
+    else
+    {
+        //assign the member corresponding data
+        myMember->SetName(username);
+        myMember->SetNumber(password);
+        myMember->SetType(executive);
+        myMember->Renew(date);
 
-    myMember->AddToMemberList(myMember);
+        myMember->AddToMemberList(myMember);
 
-    QMessageBox::information(this, "List of Members", "The member has being added to "
+        QMessageBox::information(this, "List of Members", "The member has being added to "
                              "the list!");
+    }
 }
 
 /*
@@ -110,8 +118,7 @@ void MainWindow::on_removeButton_clicked()
 }
 
 /*
- * This buttom will output in a differet stacked widget a list of the members
- *  in the linked list
+ * This buttom will take you to the view members page
  */
 void MainWindow::on_viewButton_clicked()
 {
@@ -124,4 +131,37 @@ void MainWindow::on_viewButton_clicked()
 void MainWindow::on_pushButton_goBack_clicked()
 {
     ui->stackedWidget->setCurrentWidget(ui->memberPage);
+}
+
+/*
+ * This buttom will take you back to the main menu from the member page
+*/
+void MainWindow::on_pushButton_returnToMenu_clicked()
+{
+    ui->stackedWidget->setCurrentWidget(ui->menuPage);
+}
+
+/*
+ * This buttom will take you to member page from the main menu
+ */
+void MainWindow::on_pushButton_addMembers_clicked()
+{
+    ui->stackedWidget->setCurrentWidget(ui->memberPage);
+}
+
+
+/*
+ * This buttom will take you back to the main menu from the sales report page
+*/
+void MainWindow::on_pushButton_goBacktoMenu_clicked()
+{
+    ui->stackedWidget->setCurrentWidget(ui->menuPage);
+}
+
+/*
+ * This buttom will take you to sales report page from the main menu
+ */
+void MainWindow::on_pushButton_2_salesReport_clicked()
+{
+    ui->stackedWidget->setCurrentWidget(ui->salesReportPage);
 }

@@ -32,6 +32,7 @@ private slots:
     void on_pushButton_returnToMenu_clicked();       //return to main menu from member page
     void on_pushButton_goBacktoMenu_clicked();       //return to main menu from sales report
     void on_pushButton_2_salesReport_clicked();      //takes you to sales report page
+    void on_pushButton_generateList_clicked();       //this will generate the list of members
 
 private:
     Ui::MainWindow *ui;

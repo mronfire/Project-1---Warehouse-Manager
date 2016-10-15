@@ -426,22 +426,22 @@
        <layout class="QGridLayout" name="gridLayout_7">
         <item row="0" column="0">
          <layout class="QGridLayout" name="gridLayout_6">
-          <item row="3" column="0">
+          <item row="4" column="0">
            <widget class="QPushButton" name="pushButton_goBack">
             <property name="text">
              <string>Go back</string>
             </property>
            </widget>
           </item>
-          <item row="2" column="0">
+          <item row="1" column="0">
+           <widget class="QListWidget" name="listWidget_members"/>
+          </item>
+          <item row="3" column="0">
            <widget class="QPushButton" name="pushButton_switchAccount">
             <property name="text">
              <string>Switch Account</string>
             </property>
            </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QListWidget" name="listWidget_members"/>
           </item>
           <item row="0" column="0">
            <widget class="QLabel" name="label_3">
@@ -455,6 +455,13 @@
             </property>
             <property name="text">
              <string>List of Members</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QPushButton" name="pushButton_generateList">
+            <property name="text">
+             <string>Generate List</string>
             </property>
            </widget>
           </item>
@@ -474,7 +481,7 @@
            </widget>
           </item>
           <item row="1" column="0">
-           <widget class="QListWidget" name="listWidget"/>
+           <widget class="QListWidget" name="listWidget_salesReport"/>
           </item>
           <item row="0" column="0">
            <widget class="QLabel" name="label_2">
@@ -553,7 +560,7 @@
   <tabstop>pushButton_goBack</tabstop>
   <tabstop>listWidget_members</tabstop>
   <tabstop>pushButton_goBacktoMenu</tabstop>
-  <tabstop>listWidget</tabstop>
+  <tabstop>listWidget_salesReport</tabstop>
  </tabstops>
  <resources/>
  <connections/>

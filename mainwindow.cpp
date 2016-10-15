@@ -135,6 +135,8 @@ void MainWindow::on_viewButton_clicked()
 void MainWindow::on_pushButton_goBack_clicked()
 {
     ui->stackedWidget->setCurrentWidget(ui->memberPage);
+
+    ui->listWidget_members->clear(); //clears the list widget
 }
 
 /*
@@ -167,4 +169,15 @@ void MainWindow::on_pushButton_goBacktoMenu_clicked()
 void MainWindow::on_pushButton_2_salesReport_clicked()
 {
     ui->stackedWidget->setCurrentWidget(ui->salesReportPage);
+}
+
+/*
+ * This buttom will generate the list of members and display it
+ */
+void MainWindow::on_pushButton_generateList_clicked()
+{
+    for(int i = 0; i < 10; i++)
+    {
+        ui->listWidget_members->addItem(QString::number(i) + "member here!");
+    }
 }

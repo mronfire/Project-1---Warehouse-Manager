@@ -12,6 +12,7 @@ void ReadPurchases(QString inFile, member *memberList, SalesDay *dayList);
 void DeleteMembers(member *memberList);
 void DeleteDays(SalesDay *dayList);
 void SaveData(QString memFileName, QString purchFileName, member *memberList, SalesDay *dayList);
+//QString outputMembers(member *memberList);
 
 
 #endif // FILEPARSING_H

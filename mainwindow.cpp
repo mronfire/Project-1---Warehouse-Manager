@@ -74,18 +74,18 @@ void MainWindow::on_closeButton_clicked()
  */
 void MainWindow::on_addButton_clicked()
 {
-    QString username, password, date;
+    QString username, numID, date;
     bool    executive;
     member *myMember = NULL;
 
     myMember = new member;
 
     username  = ui->lineEdit_username->text();
-    password  = ui->lineEdit_numberID->text();
+    numID     = ui->lineEdit_numberID->text();
     executive = ui->radioButton_execituveType; //not sure how radio buttom works
     date      = ui->lineEdit_Date->text();
 
-    if(username == NULL || password == NULL || date == NULL)
+    if(username == NULL || numID == NULL || date == NULL)
     {
         QMessageBox::critical(this, "List of Members", "Please fill in all the fields required"
                               " in order to add a member!");
@@ -94,15 +94,19 @@ void MainWindow::on_addButton_clicked()
     {
         //assign the member corresponding data
         myMember->SetName(username);
-        myMember->SetNumber(password);
+        myMember->SetNumber(numID);
         myMember->SetType(executive);
         myMember->Renew(date);
 
-        myMember->AddToMemberList(myMember);
+        myMember->AddToMemberList(myMember); //adds member to list
 
         QMessageBox::information(this, "List of Members", "The member has being added to "
                              "the list!");
     }
+
+    ui->lineEdit_username->clear();
+    ui->lineEdit_numberID->clear();
+    ui->lineEdit_Date->clear();
 }
 
 /*
@@ -148,7 +152,6 @@ void MainWindow::on_pushButton_addMembers_clicked()
 {
     ui->stackedWidget->setCurrentWidget(ui->memberPage);
 }
-
 
 /*
  * This buttom will take you back to the main menu from the sales report page

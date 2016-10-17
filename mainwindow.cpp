@@ -111,7 +111,7 @@ void MainWindow::on_addButton_clicked()
         myMember->AddToMemberList(myMember); //adds member to list
 
         QMessageBox::information(this, "List of Members", "The member has being added to "
-                             "the list!");
+                                 "the list!");
     }
 
     //clears the line edits for next input
@@ -128,8 +128,28 @@ void MainWindow::on_addButton_clicked()
 void MainWindow::on_removeButton_clicked()
 {
     //work on this******
+    QString numID;
+    member *myMember = memberList;
 
+    numID = ui->lineEdit_numberID->text();
 
+    if(myMember->GetThisMember(numID) == NULL)
+    {
+        QMessageBox::information(this, "List of Members", "There is not one member"
+                                 " with that information in the database!");
+    }
+    else
+    {
+        delete myMember;
+
+        QMessageBox::information(this, "List of Members", "The member has being deleted "
+                                 "from the list!");
+    }
+
+    //clears the line edits for next input
+    ui->lineEdit_username->clear();
+    ui->lineEdit_numberID->clear();
+    ui->lineEdit_Date->clear();
 }
 
 /*
@@ -194,6 +214,7 @@ void MainWindow::on_pushButton_generateList_clicked()
     {
         ui->listWidget_members->addItem(QString::number(i + 1) + " add member here!!!");
     }
+
 }
 
 /*
@@ -214,6 +235,8 @@ void MainWindow::on_pushButton_generateSales_clicked()
  */
 void MainWindow::on_pushButton_switchAccount_clicked()
 {
-    QListWidgetItem * item = ui->listWidget_members->currentItem();
+    QListWidgetItem *item = ui->listWidget_members->currentItem();
+
     item->setTextColor(Qt::red);
+
 }

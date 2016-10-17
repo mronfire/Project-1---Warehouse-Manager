@@ -34,8 +34,7 @@ private slots:
     void on_pushButton_2_salesReport_clicked();      //takes you to sales report page
     void on_pushButton_generateList_clicked();       //this will generate the list of members
     void on_pushButton_generateSales_clicked();      //this will generate the sales report list
-
-    void on_pushButton_switchAccount_clicked();
+    void on_pushButton_switchAccount_clicked();      //this should switch the account type
 
 private:
     Ui::MainWindow *ui;

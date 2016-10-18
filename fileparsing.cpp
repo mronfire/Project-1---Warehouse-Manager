@@ -301,8 +301,3 @@ void SaveData(QString memFileName, QString purchFileName, member *memberList, Sa
 
     purchFile.close();
 }
-
-//QString outputMembers(member *memberList)
-//{
-
-//}

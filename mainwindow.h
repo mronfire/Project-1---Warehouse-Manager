@@ -38,6 +38,12 @@ private slots:
 
     void on_pushButton_3_clicked();
 
+    void on_pushButton_clicked();
+
+    void on_pushButton_5_clicked();
+
+    void on_pushButton_2_clicked();
+
 private:
     Ui::MainWindow *ui;
     QString memFile = "C:/Users/mnelson39/Desktop/Proj1/members.txt";

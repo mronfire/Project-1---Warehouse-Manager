@@ -22,7 +22,7 @@ MainWindow::MainWindow(QWidget *parent) :
  */
 MainWindow::~MainWindow()
 {
-    //SaveData(memFile, purchFile, memberList, dayList); //Out of order
+    SaveData(memFile, purchFile, memberList, dayList);
     DeleteMembers(memberList); //always delete members before days!
     DeleteDays(dayList);
     cout << "\nThank you for using my program!\n";
@@ -108,7 +108,7 @@ void MainWindow::on_addButton_clicked()
         myMember->SetNumber(numID);
         myMember->Renew(date);
 
-        myMember->AddToMemberList(myMember); //adds member to list
+        memberList->AddToMemberList(myMember); //adds member to list
 
         QMessageBox::information(this, "List of Members", "The member has being added to "
                                  "the list!");
@@ -310,4 +310,71 @@ void MainWindow::on_pushButton_switchAccount_clicked()
 void MainWindow::on_pushButton_3_clicked()
 {
     this->close();
+}
+
+void MainWindow::on_pushButton_clicked()
+{
+    ui->stackedWidget->setCurrentWidget(ui->AddPuchasePage);
+}
+
+void MainWindow::on_pushButton_5_clicked()
+{
+    ui->stackedWidget->setCurrentWidget(ui->menuPage);
+}
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    Purchase *purchptr;
+    SalesDay *dayptr = dayList;
+    member   *memptr = memberList;
+
+    QString date;
+    QString memNum;
+    QString objType;
+    float price = 0;
+    int quant = 1;
+
+    date = ui->dateLineEdit->text();
+    memNum = ui->nameLineEdit->text();
+    objType = ui->objTypeLineEdit->text();
+    price = ui->priceLineEdit->text().remove('$').toFloat();
+    quant = ui->quantLineEdit->text().toInt();
+
+    if(date != NULL && memNum != NULL && objType != NULL)
+    {
+        purchptr = new Purchase(memNum, objType, price, quant, date);
+        while(date != dayptr->GetDate() && dayptr->GetDate() != "Other")
+        {
+            dayptr = dayptr->GetNextDay();
+        }
+
+        while(memNum != memptr->GetNumber() && memptr != NULL)
+        {
+            memptr = memptr->GetNextMember();
+        }
+
+        if(memptr != NULL && dayptr->GetDate() != "Other")
+        {
+            dayptr->AddPurchase(purchptr, memberList);
+            memptr->AddPurchase(purchptr);
+        }
+        else if(memptr == NULL)
+        {
+            //output no such member exists
+        }
+        else if(dayptr->GetDate() == "Other")
+        {
+            //please enter a date between first and last date
+        }
+    }
+    else
+    {
+        //output request to put fill all fields
+    }
+
+    ui->dateLineEdit->clear();
+    ui->nameLineEdit->clear();
+    ui->objTypeLineEdit->clear();
+    ui->priceLineEdit->setText("$");
+    ui->quantLineEdit->clear();
 }

@@ -24,7 +24,7 @@
     <item row="0" column="0">
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>3</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="loginPage">
        <layout class="QGridLayout" name="gridLayout_4">
@@ -180,7 +180,7 @@
           <item row="8" column="0">
            <widget class="QLabel" name="label_4">
             <property name="text">
-             <string>3 - </string>
+             <string>3 - Exit Program</string>
             </property>
            </widget>
           </item>

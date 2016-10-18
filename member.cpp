@@ -315,6 +315,24 @@ member *member::GetThisMember(QString findNum)
     return memptr;
 }
 
+qint32 member::GetListLength() //might not work?
+{
+    qint32 length;
+    member *theNextMember = GetNextMember();
+
+    if(theNextMember != NULL)
+    {
+        length = theNextMember->GetListLength();
+        length ++;
+    }
+    else
+    {
+        length = 1;
+    }
+
+    return length;
+}
+
 float ExecClass::GetRebate()
 {
     return rebate;

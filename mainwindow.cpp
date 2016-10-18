@@ -209,12 +209,40 @@ void MainWindow::on_pushButton_2_salesReport_clicked()
  */
 void MainWindow::on_pushButton_generateList_clicked()
 {
-
-    for(int i = 0; i < 10; i++)
+    if(memberList != NULL)
     {
-        ui->listWidget_members->addItem(QString::number(i + 1) + " add member here!!!");
-    }
+        qint32 length = memberList->GetListLength();
+        member *memptr = memberList;
+        Purchase *purchptr;
+        QString name;
+        QString memNum;
+        float   memSpent;
+        int index = 0;
 
+
+        while(index < length)
+        {
+            name = memptr->GetName();
+            memNum = memptr->GetNumber();
+            memSpent = memptr->GetSpent();
+            ui->listWidget_members->addItem("Member : " + QString::number(index + 1));
+            ui->listWidget_members->addItem("Name   : " + name);
+            ui->listWidget_members->addItem("Number : " + memNum);
+            ui->listWidget_members->addItem("Spent  : $" + QString::number(memSpent, 'f', 2));
+            purchptr = memptr->GetFirstPurchase();
+            while(purchptr != NULL)
+            {
+                ui->listWidget_members->addItem(" -" + purchptr->getObjType());
+                purchptr = purchptr->getNextMember();
+            }
+            memptr = memptr->GetNextMember();
+            index++;
+        }
+    }
+    else
+    {
+        ui->listWidget_members->addItem("There are no items in member list!!!");
+    }
 }
 
 /*
@@ -222,12 +250,50 @@ void MainWindow::on_pushButton_generateList_clicked()
  */
 void MainWindow::on_pushButton_generateSales_clicked()
 {
-
-    for(int i = 0; i < 10; i++)
+    if(dayList != NULL)
     {
-        ui->listWidget_salesReport->addItem(QString::number(i + 1) + " add sales report here here!!!");
-    }
+        int numDays = NUMDAYS;
+        int index = 0;
+        SalesDay *dayptr = dayList;
+        Purchase *purchptr = NULL;
 
+        while(index < numDays)
+        {
+            ui->listWidget_salesReport->addItem("Sales Date : " + dayptr->GetDate());
+            ui->listWidget_salesReport->addItem("Total Revenue: $" + QString::number(dayptr->GetRevenue(), 'f', 2));
+            ui->listWidget_salesReport->addItem("Normal Members: " + QString::number(dayptr->GetMem()));
+            ui->listWidget_salesReport->addItem("Executive Members: " + QString::number(dayptr->GetExec()));
+            purchptr = dayptr->GetFirstPurchase();
+            while(purchptr != NULL)
+            {
+                ui->listWidget_salesReport->addItem(" -" + purchptr->getObjType());
+                purchptr = purchptr->getNextDay();
+            }
+            index++;
+            dayptr = dayptr->GetNextDay();
+        }
+        if(dayptr->GetFirstPurchase() == NULL)
+        {
+            ui->listWidget_salesReport->addItem("There are no purchases in day \"Other\"");
+        }
+        else
+        {
+            ui->listWidget_salesReport->addItem("Out of Bounds Dates");
+            ui->listWidget_salesReport->addItem("Total Revenue: $" + QString::number(dayptr->GetRevenue(), 'f', 2));
+            ui->listWidget_salesReport->addItem("Normal Members: " + QString::number(dayptr->GetMem()));
+            ui->listWidget_salesReport->addItem("Executive Members: " + QString::number(dayptr->GetExec()));
+            purchptr = dayptr->GetFirstPurchase();
+            while(purchptr != NULL)
+            {
+                ui->listWidget_salesReport->addItem(" -" + purchptr->getObjType());
+                purchptr = purchptr->getNextDay();
+            }
+        }
+    }
+    else
+    {
+        ui->listWidget_salesReport->addItem("DayList is empty!!!");
+    }
 }
 
 /*
@@ -239,4 +305,9 @@ void MainWindow::on_pushButton_switchAccount_clicked()
 
     item->setTextColor(Qt::red);
 
+}
+
+void MainWindow::on_pushButton_3_clicked()
+{
+    this->close();
 }

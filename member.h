@@ -40,6 +40,7 @@ public:
     Purchase *GetLastPurchase();
 
     member *GetThisMember(QString findNum); //call this from memList
+    qint32 GetListLength();
 
     //mutators
     void SetName(QString newName);

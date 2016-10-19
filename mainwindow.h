@@ -35,19 +35,20 @@ private slots:
     void on_pushButton_generateList_clicked();       //this will generate the list of members
     void on_pushButton_generateSales_clicked();      //this will generate the sales report list
     void on_pushButton_switchAccount_clicked();      //this should switch the account type
+    void on_pushButton_exitProgram_clicked();        //this should quit the program
+    void on_pushButton_addPurchasesPage_clicked();   //this will take you to the add purchases page
+    void on_pushButton_backToMenu_clicked();         //takes you back to main menu from purchases page
+    void on_pushButton_addPurchase_clicked();        //adds purchase
+    void on_pushButton_removePurchase_clicked();     //remove purchase
 
-    void on_pushButton_3_clicked();
-
-    void on_pushButton_clicked();
-
-    void on_pushButton_5_clicked();
-
-    void on_pushButton_2_clicked();
 
 private:
     Ui::MainWindow *ui;
-    QString memFile = "C:/Users/mnelson39/Desktop/Proj1/members.txt";
-    QString purchFile = "C:/Users/mnelson39/Desktop/Proj1/purchases.txt";
+//    QString memFile = "C:/Users/mnelson39/Desktop/Proj1/members.txt";
+//    QString purchFile = "C:/Users/mnelson39/Desktop/Proj1/purchases.txt";
+
+    QString memFile = "C:/Users/marod/Desktop/Project-1---T.E.A.M/members.txt";
+    QString purchFile = "C:/Users/marod/Desktop/Project-1---T.E.A.M/purchases.txt";
 };
 
 #endif // MAINWINDOW_H

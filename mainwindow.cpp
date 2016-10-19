@@ -307,22 +307,34 @@ void MainWindow::on_pushButton_switchAccount_clicked()
 
 }
 
-void MainWindow::on_pushButton_3_clicked()
+/*
+ * This buttom will exit the program from the main menu
+ */
+void MainWindow::on_pushButton_exitProgram_clicked()
 {
     this->close();
 }
 
-void MainWindow::on_pushButton_clicked()
+/*
+ * This buttom will take you the add purchases page
+ */
+void MainWindow::on_pushButton_addPurchasesPage_clicked()
 {
     ui->stackedWidget->setCurrentWidget(ui->AddPuchasePage);
 }
 
-void MainWindow::on_pushButton_5_clicked()
+/*
+ * This buttom will take you back to the main menu from add purchases page
+ */
+void MainWindow::on_pushButton_backToMenu_clicked()
 {
     ui->stackedWidget->setCurrentWidget(ui->menuPage);
 }
 
-void MainWindow::on_pushButton_2_clicked()
+/*
+ * This buttom add members to the list
+ */
+void MainWindow::on_pushButton_addPurchase_clicked()
 {
     Purchase *purchptr;
     SalesDay *dayptr = dayList;
@@ -361,20 +373,33 @@ void MainWindow::on_pushButton_2_clicked()
         else if(memptr == NULL)
         {
             //output no such member exists
+            QMessageBox::information(this, "Purchase List", "There is no such member in the list, please try again!");
         }
         else if(dayptr->GetDate() == "Other")
         {
             //please enter a date between first and last date
+            QMessageBox::information(this, "Purchase List", "Please try to enter a date between ---- to ----!!");
         }
     }
     else
     {
         //output request to put fill all fields
+        if(memNum == NULL && objType == NULL && date == NULL && price == 0.0 && quant == 0)
+        {
+            QMessageBox::critical(this, "Purchase List", "Please fill in all the fields required"
+                                  " in order to add a purchase!");
+        }
     }
 
+    //clears all fields
     ui->dateLineEdit->clear();
     ui->nameLineEdit->clear();
     ui->objTypeLineEdit->clear();
     ui->priceLineEdit->setText("$");
     ui->quantLineEdit->clear();
+}
+
+void MainWindow::on_pushButton_removePurchase_clicked()
+{
+    //work on this
 }

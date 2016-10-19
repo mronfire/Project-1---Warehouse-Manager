@@ -1,3 +1,9 @@
+/*************************************************************************//**
+ * Authors  : Max Nelson, Mario Rodriguez, Trenton Coggeshall, Arturo Salgado
+ * Class    : Computer Science 1C
+ * Period   : Tuesday - Thursday 1130am to 220pm
+ * Due Date : 10/20/2016
+ ****************************************************************************/
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QMessageBox>
@@ -372,23 +378,17 @@ void MainWindow::on_pushButton_addPurchase_clicked()
         }
         else if(memptr == NULL)
         {
-            //output no such member exists
             QMessageBox::information(this, "Purchase List", "There is no such member in the list, please try again!");
         }
         else if(dayptr->GetDate() == "Other")
         {
-            //please enter a date between first and last date
             QMessageBox::information(this, "Purchase List", "Please try to enter a date between ---- to ----!!");
         }
     }
     else
     {
-        //output request to put fill all fields
-        if(memNum == NULL && objType == NULL && date == NULL && price == 0.0 && quant == 0)
-        {
-            QMessageBox::critical(this, "Purchase List", "Please fill in all the fields required"
+        QMessageBox::critical(this, "Purchase List", "Please fill in all the fields required"
                                   " in order to add a purchase!");
-        }
     }
 
     //clears all fields

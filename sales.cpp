@@ -1,3 +1,9 @@
+/*************************************************************************//**
+ * Authors  : Max Nelson, Mario Rodriguez, Trenton Coggeshall, Arturo Salgado
+ * Class    : Computer Science 1C
+ * Period   : Tuesday - Thursday 1130am to 220pm
+ * Due Date : 10/20/2016
+ ****************************************************************************/
 #include "Sales.h"
 
 SalesDay::SalesDay()

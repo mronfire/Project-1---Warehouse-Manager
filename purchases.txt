@@ -60,7 +60,7 @@ Paper Shredder
 1
 08/01/2015
 56723
-Envelops
+Envelopes
 2.99
 5
 08/01/2015
@@ -128,6 +128,11 @@ Coffee Creamer
 Legal Pads
 6.25
 10
+08/02/2015
+15132
+Pokemon Sun and Moon
+39.99
+1
 08/03/2015
 12345
 1 gallon milk
@@ -178,6 +183,11 @@ Levi 501's
 diet Coke
 6.79
 26
+08/03/2015
+15132
+Digital Clock
+12.5
+1
 08/04/2015
 12345
 1 gallon milk
@@ -308,3 +318,8 @@ Coke
 Propel Fitness Water
 12.5
 3
+08/05/2015
+15132
+Exotic Butter Gift Basket
+299.95
+1

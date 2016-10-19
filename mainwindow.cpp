@@ -136,6 +136,8 @@ void MainWindow::on_removeButton_clicked()
     //work on this******
     QString numID;
     member *myMember = memberList;
+    member *prevMember = memberList;
+
 
     numID = ui->lineEdit_numberID->text();
 
@@ -146,6 +148,19 @@ void MainWindow::on_removeButton_clicked()
     }
     else
     {
+        if(myMember == memberList)
+        {
+            memberList = myMember->GetNextMember();
+        }
+        else
+        {
+            while(prevMember->GetNextMember() != myMember)
+            {
+                prevMember = prevMember->GetNextMember();
+            }
+            prevMember->SetNextMember(myMember->GetNextMember());
+        }
+
         delete myMember;
 
         QMessageBox::information(this, "List of Members", "The member has being deleted "
@@ -215,32 +230,21 @@ void MainWindow::on_pushButton_2_salesReport_clicked()
  */
 void MainWindow::on_pushButton_generateList_clicked()
 {
+    ui->listWidget_members->clear();
+
     if(memberList != NULL)
     {
         qint32 length = memberList->GetListLength();
         member *memptr = memberList;
-        Purchase *purchptr;
         QString name;
         QString memNum;
-        float   memSpent;
         int index = 0;
-
 
         while(index < length)
         {
             name = memptr->GetName();
             memNum = memptr->GetNumber();
-            memSpent = memptr->GetSpent();
-            ui->listWidget_members->addItem("Member : " + QString::number(index + 1));
-            ui->listWidget_members->addItem("Name   : " + name);
-            ui->listWidget_members->addItem("Number : " + memNum);
-            ui->listWidget_members->addItem("Spent  : $" + QString::number(memSpent, 'f', 2));
-            purchptr = memptr->GetFirstPurchase();
-            while(purchptr != NULL)
-            {
-                ui->listWidget_members->addItem(" -" + purchptr->getObjType());
-                purchptr = purchptr->getNextMember();
-            }
+            ui->listWidget_members->addItem(memNum + ": " + name);
             memptr = memptr->GetNextMember();
             index++;
         }
@@ -252,10 +256,72 @@ void MainWindow::on_pushButton_generateList_clicked()
 }
 
 /*
+ * This buttom will switch the members account, either to normal or executive member
+ */
+void MainWindow::on_pushButton_switchAccount_clicked()
+{
+
+    QListWidgetItem *item = ui->listWidget_members->currentItem();
+
+    ui->listWidget_memPurch->clear();
+
+    if(item != NULL)
+    {
+        QString memNum = item->text().left(5);
+        member *memptr = memberList->GetThisMember(memNum);
+        Purchase *purchptr;
+        QString name;
+        float   memSpent;
+
+        if(memptr != NULL)
+        {
+            name = memptr->GetName();
+            memSpent = memptr->GetSpent();
+            purchptr = memptr->GetFirstPurchase();
+            ui->listWidget_memPurch->addItem("Member : " + name);
+            ui->listWidget_memPurch->addItem("Number : " + memNum);
+            ui->listWidget_memPurch->addItem("Spent  : $" + QString::number(memSpent, 'f', 2));
+
+            if(memptr->GetType())
+            {
+                ExecClass *execptr = dynamic_cast<ExecClass*>(memptr);
+                float memRebate = execptr->GetRebate();
+
+                ui->listWidget_memPurch->addItem(name + " is an Executive Member!");
+                ui->listWidget_memPurch->addItem("Rebate : $" + QString::number(memRebate, 'f', 2));
+            }
+            else
+            {
+                ui->listWidget_memPurch->addItem(name + " is an Normal Member!");
+            }
+
+            if(purchptr != NULL)
+            {
+                while(purchptr != NULL)
+                {
+                    ui->listWidget_memPurch->addItem(" -" + purchptr->getObjType());
+                    purchptr = purchptr->getNextMember();
+                }
+            }
+            else
+            {
+                ui->listWidget_memPurch->addItem(name + " has not bought anything yet!");
+            }
+        }
+    }
+    else
+    {
+        ui->listWidget_memPurch->addItem("There are no member selected!!!");
+    }
+}
+
+/*
  * This buttom will generate the list of sales report and display it
  */
 void MainWindow::on_pushButton_generateSales_clicked()
 {
+    ui->listWidget_salesReport->clear();
+
     if(dayList != NULL)
     {
         int numDays = NUMDAYS;
@@ -300,17 +366,6 @@ void MainWindow::on_pushButton_generateSales_clicked()
     {
         ui->listWidget_salesReport->addItem("DayList is empty!!!");
     }
-}
-
-/*
- * This buttom will switch the members account, either to normal or executive member
- */
-void MainWindow::on_pushButton_switchAccount_clicked()
-{
-    QListWidgetItem *item = ui->listWidget_members->currentItem();
-
-    item->setTextColor(Qt::red);
-
 }
 
 /*

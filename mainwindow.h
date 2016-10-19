@@ -56,11 +56,15 @@ private slots:
 private:
     Ui::MainWindow *ui;                              /*!< A MainWindow pointer to UI */
 
-//    QString memFile = "C:/Users/mnelson39/Desktop/Proj1/members.txt";
-//    QString purchFile = "C:/Users/mnelson39/Desktop/Proj1/purchases.txt";
+    //These don't work but they might
+    //QString memFile = ":/myresources/MyFiles/members.txt";
+    //QString purchFile = ":/myresources/MyFiles/purchases.txt";
 
-    QString memFile = "C:/Users/marod/Desktop/Project-1---T.E.A.M/members.txt";
-    QString purchFile = "C:/Users/marod/Desktop/Project-1---T.E.A.M/purchases.txt";
+    QString memFile = "C:/Users/mnelson39/Desktop/Proj1/members.txt";
+    QString purchFile = "C:/Users/mnelson39/Desktop/Proj1/purchases.txt";
+
+    //QString memFile = "C:/Users/marod/Desktop/Project-1---T.E.A.M/members.txt";
+    //QString purchFile = "C:/Users/marod/Desktop/Project-1---T.E.A.M/purchases.txt";
 };
 
 #endif // MAINWINDOW_H

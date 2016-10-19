@@ -65,13 +65,17 @@ member *CreateMemberList(QString inFile)
                 ExecBool = false;
             }
 
-            if(ExecBool)
+            if(name != NULL && memNum.size() == 5 &&
+               date[2] == '/' && date[5] == '/' && date.size() == 10) //error checking!
             {
-                memberList->AddToMemberList(new ExecClass(name, memNum, ExecBool, date));
-            }
-            else
-            {
-                memberList->AddToMemberList(new member(name, memNum, ExecBool, date));
+                if(ExecBool)
+                {
+                    memberList->AddToMemberList(new ExecClass(name, memNum, ExecBool, date));
+                }
+                else
+                {
+                    memberList->AddToMemberList(new member(name, memNum, ExecBool, date));
+                }
             }
         }
     }
@@ -167,13 +171,13 @@ void ReadPurchases(QString inFile, member *memberList, SalesDay *dayList)
             //find and assign member
             memptr = memberList;
             while(customer != memptr->GetNumber() && memptr != NULL)
-            {
-                memptr = memptr->GetNextMember();
+            { 
                 while(memptr == NULL) //this should never run
                 {
                     cout << "member oob";
                     cin.ignore(9001,'\n');
                 } //waits so the program no asplode
+                memptr = memptr->GetNextMember();
             }
 
             if(memptr != NULL) //if we have the right member
@@ -213,7 +217,7 @@ void DeleteMembers(member *memberList)
         while(memptr->GetFirstPurchase() != NULL)
         {
             cout << " -" << memptr->GetFirstPurchase()->getObjType().toStdString() << endl;
-            purchptr = memptr->GetFirstPurchase()->getNextDay(); //point to next purchase in day
+            purchptr = memptr->GetFirstPurchase()->getNextMember(); //point to next purchase under that member
             memptr->SetFirstPurchase(purchptr);
         }
 

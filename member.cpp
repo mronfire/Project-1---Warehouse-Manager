@@ -358,40 +358,46 @@ void ExecClass::AddRebate(Purchase *purch)
     rebate += receit * REBATE_RATE;
 }
 
-void member::AdjustType()
+
+
+bool member::isWrongType()
 {
     float mem, ex;
+    bool isWrong;
 
     mem = 85 + GetSpent();
     ex = 95 + GetSpent() - (REBATE_RATE * GetSpent());
 
-    if(mem < ex)
+    if(mem <= ex)
     {
-        cout << "You should maintain your regular membership";
+        isWrong = false;
     }
     else
     {
-        cout << "You should upgrade your membership!";
-        ChangeMembership();
+        isWrong = true;
     }
+
+    return isWrong;
 }
 
-void ExecClass::AdjustType()
+bool ExecClass::isWrongType()
 {
     float mem, ex;
+    bool isWrong;
 
     mem = 85 + GetSpent();
     ex = 95 + GetSpent() - rebate;
 
     if(mem < ex)
     {
-        cout << "You should consider switching to a regular membership!\n";
-        ChangeMembership();
+        isWrong = true;
     }
     else
     {
-        cout << "You should maintain your executive membership.";
+        isWrong = false;
     }
+
+    return isWrong;
 }
 
 void member::ChangeMembership()
@@ -430,5 +436,13 @@ ExecClass::~ExecClass()
 
 }
 
+member *member::operator +(member *newMember)
+{
+    return AddToMemberList(newMember);
+}
 
+void member::operator +(Purchase *newPurchase)
+{
+    AddPurchase(newPurchase);
+}
 

@@ -288,11 +288,19 @@ void MainWindow::on_pushButton_switchAccount_clicked()
                 float memRebate = execptr->GetRebate();
 
                 ui->listWidget_memPurch->addItem(name + " is an Executive Member!");
+                if(memptr->isWrongType())
+                {
+                    ui->listWidget_memPurch->addItem("You could save money if you switched to a normal membership!");
+                }
                 ui->listWidget_memPurch->addItem("Rebate : $" + QString::number(memRebate, 'f', 2));
             }
             else
             {
                 ui->listWidget_memPurch->addItem(name + " is an Normal Member!");
+                if(memptr->isWrongType())
+                {
+                    ui->listWidget_memPurch->addItem("You could save money if you switched to an Executive membership!");
+                }
             }
 
             if(purchptr != NULL)

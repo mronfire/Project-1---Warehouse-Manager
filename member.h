@@ -44,6 +44,7 @@ public:
     member *GetNextMember();
     Purchase *GetFirstPurchase();
     Purchase *GetLastPurchase();
+    virtual bool isWrongType();
 
     member *GetThisMember(QString findNum); //call this from memList
     qint32 GetListLength();
@@ -69,7 +70,10 @@ public:
     void CalcTotalSpent(); //Get total spent
     void CalcTotalTax(); //Get total spent with tax
     void Expiration(QString today);
-    virtual void AdjustType();
+
+    //overloaded operators
+    member *operator+(member *newMember);
+    void operator+(Purchase *newPurchase);
 
     //destructor
     virtual ~member();
@@ -87,7 +91,7 @@ public:
     float GetRebate();
     void SetRebate(float newRebate);
     void AddRebate(Purchase *purch);
-    virtual void AdjustType();
+    virtual bool isWrongType();
     virtual void AddPurchase(Purchase *a);
     virtual ~ExecClass();
 };

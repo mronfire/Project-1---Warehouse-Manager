@@ -6,6 +6,12 @@
  ****************************************************************************/
 #include "fileparsing.h"
 
+//! Create member list function
+/*!
+ * \brief This function will create the linked list of members
+ * \param inFile
+ * \return the top of member list
+ */
 member *CreateMemberList(QString inFile)
 {
     member *memberList;
@@ -85,6 +91,13 @@ member *CreateMemberList(QString inFile)
     return memberList;
 }
 
+//! Create day list function
+/*!
+ * \brief This function will create the linked list for the days
+ * \param numDays
+ * \param day1
+ * \return the top of days list
+ */
 SalesDay *CreateDayList(int numDays, QString day1)
 {
     int index;
@@ -106,6 +119,14 @@ SalesDay *CreateDayList(int numDays, QString day1)
     return dayList;
 }
 
+//! Read all purchases
+/*!
+ * \brief This function will read all purchases from each day and assign it to
+ *        respective member and the day it was bought
+ * \param inFile
+ * \param memberList
+ * \param dayList
+ */
 void ReadPurchases(QString inFile, member *memberList, SalesDay *dayList)
 {
     QString day;
@@ -191,21 +212,24 @@ void ReadPurchases(QString inFile, member *memberList, SalesDay *dayList)
         }
     }
 
-
     purchFile.close();
     cout << "Done loading purchases!\n";
 }
 
+//! Delete all members
+/*!
+ * \brief This function will delete all members of the list
+ * \param memberList
+ */
 void DeleteMembers(member *memberList)
 {
     //ALWAYS DELETE MEMBERS BEFORE DAYS
     member   *memptr;
     Purchase *purchptr;
 
-    //ostringstream output;
-
     memptr = memberList;
     cout << "\nMember list:\n";
+
     //delete all dynamically allocated memory
     while(memberList != NULL)
     {
@@ -225,17 +249,18 @@ void DeleteMembers(member *memberList)
         delete memberList;
         memberList = memptr;
     }
-
-    //return output.str();
 }
 
+//! Delete all days
+/*!
+ * \brief This function will delete all days of the list
+ * \param dayList
+ */
 void DeleteDays(SalesDay *dayList)
 {
     //ALWAYS DELETE MEMBERS BEFORE DAYS
     SalesDay *dayptr;
     Purchase *purchptr;
-
-    //ostringstream output;
 
     dayptr = dayList;
     cout << "\nDayList:\n";
@@ -257,10 +282,16 @@ void DeleteDays(SalesDay *dayList)
         delete dayList;
         dayList = dayptr;
     }
-
-    //return output.str();
 }
 
+//! Save all data
+/*!
+ * \brief This function will save all data made to the files for later use
+ * \param memFileName
+ * \param purchFileName
+ * \param memberList
+ * \param dayList
+ */
 void SaveData(QString memFileName, QString purchFileName, member *memberList, SalesDay *dayList)
 {
     member *memptr = memberList;

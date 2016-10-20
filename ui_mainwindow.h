@@ -66,7 +66,7 @@ public:
     QPushButton *pushButton_2_salesReport;
     QPushButton *pushButton_addMembers;
     QSpacerItem *verticalSpacer_7;
-    QPushButton *pushButton_8;
+    QPushButton *pushButton_renewMembership;
     QLabel *label_12;
     QWidget *memberPage;
     QGridLayout *gridLayout_5;
@@ -110,9 +110,9 @@ public:
     QGridLayout *gridLayout_14;
     QListWidget *listWidget_ItemsSimple;
     QListWidget *listWidget_Items;
-    QPushButton *pushButton;
+    QPushButton *pushButton_generateItemList;
     QLabel *label_11;
-    QPushButton *pushButton_2;
+    QPushButton *pushButton_backMenu;
     QWidget *AddPuchasePage;
     QGridLayout *gridLayout_13;
     QGridLayout *gridLayout_12;
@@ -133,18 +133,18 @@ public:
     QSpacerItem *verticalSpacer_9;
     QSpacerItem *horizontalSpacer_5;
     QSpacerItem *horizontalSpacer_6;
-    QPushButton *pushButton_3;
+    QPushButton *pushButton_viewAllPurchases;
     QWidget *ExpirationPage;
     QGridLayout *gridLayout_17;
     QGridLayout *gridLayout_16;
-    QListWidget *listWidget_expMemPlus;
-    QPushButton *pushButton_9;
-    QPushButton *pushButton_7;
     QListWidget *listWidget_expMem;
+    QListWidget *listWidget_expMemPlus;
+    QPushButton *pushButton_renewExec;
+    QPushButton *pushButton_renewNormal;
+    QPushButton *pushButton_generateExpDate;
     QLabel *label_13;
-    QPushButton *pushButton_5;
-    QPushButton *pushButton_6;
-    QPushButton *pushButton_4;
+    QPushButton *pushButton_inspectMember;
+    QPushButton *pushButton_backToMain;
     QMenuBar *menuBar;
     QMenu *menuAbout;
     QToolBar *mainToolBar;
@@ -316,10 +316,10 @@ public:
 
         gridLayout_8->addItem(verticalSpacer_7, 0, 1, 1, 1);
 
-        pushButton_8 = new QPushButton(menuPage);
-        pushButton_8->setObjectName(QStringLiteral("pushButton_8"));
+        pushButton_renewMembership = new QPushButton(menuPage);
+        pushButton_renewMembership->setObjectName(QStringLiteral("pushButton_renewMembership"));
 
-        gridLayout_8->addWidget(pushButton_8, 9, 1, 1, 1);
+        gridLayout_8->addWidget(pushButton_renewMembership, 9, 1, 1, 1);
 
         label_12 = new QLabel(menuPage);
         label_12->setObjectName(QStringLiteral("label_12"));
@@ -542,20 +542,20 @@ public:
 
         gridLayout_15->addLayout(gridLayout_14, 1, 0, 1, 1);
 
-        pushButton = new QPushButton(PurchViewPage);
-        pushButton->setObjectName(QStringLiteral("pushButton"));
+        pushButton_generateItemList = new QPushButton(PurchViewPage);
+        pushButton_generateItemList->setObjectName(QStringLiteral("pushButton_generateItemList"));
 
-        gridLayout_15->addWidget(pushButton, 2, 0, 1, 1);
+        gridLayout_15->addWidget(pushButton_generateItemList, 2, 0, 1, 1);
 
         label_11 = new QLabel(PurchViewPage);
         label_11->setObjectName(QStringLiteral("label_11"));
 
         gridLayout_15->addWidget(label_11, 0, 0, 1, 1);
 
-        pushButton_2 = new QPushButton(PurchViewPage);
-        pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
+        pushButton_backMenu = new QPushButton(PurchViewPage);
+        pushButton_backMenu->setObjectName(QStringLiteral("pushButton_backMenu"));
 
-        gridLayout_15->addWidget(pushButton_2, 3, 0, 1, 1);
+        gridLayout_15->addWidget(pushButton_backMenu, 3, 0, 1, 1);
 
         stackedWidget->addWidget(PurchViewPage);
         AddPuchasePage = new QWidget();
@@ -648,10 +648,10 @@ public:
 
         gridLayout_12->addItem(horizontalSpacer_6, 4, 3, 1, 1);
 
-        pushButton_3 = new QPushButton(AddPuchasePage);
-        pushButton_3->setObjectName(QStringLiteral("pushButton_3"));
+        pushButton_viewAllPurchases = new QPushButton(AddPuchasePage);
+        pushButton_viewAllPurchases->setObjectName(QStringLiteral("pushButton_viewAllPurchases"));
 
-        gridLayout_12->addWidget(pushButton_3, 9, 2, 1, 1);
+        gridLayout_12->addWidget(pushButton_viewAllPurchases, 9, 2, 1, 1);
 
 
         gridLayout_13->addLayout(gridLayout_12, 0, 0, 1, 1);
@@ -666,48 +666,48 @@ public:
         gridLayout_16 = new QGridLayout();
         gridLayout_16->setSpacing(6);
         gridLayout_16->setObjectName(QStringLiteral("gridLayout_16"));
+        listWidget_expMem = new QListWidget(ExpirationPage);
+        listWidget_expMem->setObjectName(QStringLiteral("listWidget_expMem"));
+
+        gridLayout_16->addWidget(listWidget_expMem, 1, 0, 1, 1);
+
         listWidget_expMemPlus = new QListWidget(ExpirationPage);
         listWidget_expMemPlus->setObjectName(QStringLiteral("listWidget_expMemPlus"));
 
         gridLayout_16->addWidget(listWidget_expMemPlus, 1, 1, 1, 1);
 
-        pushButton_9 = new QPushButton(ExpirationPage);
-        pushButton_9->setObjectName(QStringLiteral("pushButton_9"));
+        pushButton_renewExec = new QPushButton(ExpirationPage);
+        pushButton_renewExec->setObjectName(QStringLiteral("pushButton_renewExec"));
 
-        gridLayout_16->addWidget(pushButton_9, 5, 1, 1, 1);
+        gridLayout_16->addWidget(pushButton_renewExec, 5, 1, 1, 1);
 
-        pushButton_7 = new QPushButton(ExpirationPage);
-        pushButton_7->setObjectName(QStringLiteral("pushButton_7"));
+        pushButton_renewNormal = new QPushButton(ExpirationPage);
+        pushButton_renewNormal->setObjectName(QStringLiteral("pushButton_renewNormal"));
 
-        gridLayout_16->addWidget(pushButton_7, 5, 0, 1, 1);
+        gridLayout_16->addWidget(pushButton_renewNormal, 5, 0, 1, 1);
 
-        listWidget_expMem = new QListWidget(ExpirationPage);
-        listWidget_expMem->setObjectName(QStringLiteral("listWidget_expMem"));
+        pushButton_generateExpDate = new QPushButton(ExpirationPage);
+        pushButton_generateExpDate->setObjectName(QStringLiteral("pushButton_generateExpDate"));
 
-        gridLayout_16->addWidget(listWidget_expMem, 1, 0, 1, 1);
+        gridLayout_16->addWidget(pushButton_generateExpDate, 3, 0, 1, 2);
 
         label_13 = new QLabel(ExpirationPage);
         label_13->setObjectName(QStringLiteral("label_13"));
 
         gridLayout_16->addWidget(label_13, 0, 0, 1, 1);
 
-        pushButton_5 = new QPushButton(ExpirationPage);
-        pushButton_5->setObjectName(QStringLiteral("pushButton_5"));
+        pushButton_inspectMember = new QPushButton(ExpirationPage);
+        pushButton_inspectMember->setObjectName(QStringLiteral("pushButton_inspectMember"));
 
-        gridLayout_16->addWidget(pushButton_5, 3, 0, 1, 2);
-
-        pushButton_6 = new QPushButton(ExpirationPage);
-        pushButton_6->setObjectName(QStringLiteral("pushButton_6"));
-
-        gridLayout_16->addWidget(pushButton_6, 4, 0, 1, 2);
+        gridLayout_16->addWidget(pushButton_inspectMember, 4, 0, 1, 2);
 
 
         gridLayout_17->addLayout(gridLayout_16, 0, 0, 1, 1);
 
-        pushButton_4 = new QPushButton(ExpirationPage);
-        pushButton_4->setObjectName(QStringLiteral("pushButton_4"));
+        pushButton_backToMain = new QPushButton(ExpirationPage);
+        pushButton_backToMain->setObjectName(QStringLiteral("pushButton_backToMain"));
 
-        gridLayout_17->addWidget(pushButton_4, 6, 0, 1, 1);
+        gridLayout_17->addWidget(pushButton_backToMain, 1, 0, 1, 1);
 
         stackedWidget->addWidget(ExpirationPage);
 
@@ -775,7 +775,7 @@ public:
         pushButton_exitProgram->setText(QApplication::translate("MainWindow", "EXIT", 0));
         pushButton_2_salesReport->setText(QApplication::translate("MainWindow", "GO", 0));
         pushButton_addMembers->setText(QApplication::translate("MainWindow", "GO", 0));
-        pushButton_8->setText(QApplication::translate("MainWindow", "GO", 0));
+        pushButton_renewMembership->setText(QApplication::translate("MainWindow", "GO", 0));
         label_12->setText(QApplication::translate("MainWindow", "4 - Renew Membership", 0));
         label_Header->setText(QApplication::translate("MainWindow", "Enter Member Information", 0));
         label_numberID->setText(QApplication::translate("MainWindow", "Member Number ID", 0));
@@ -794,9 +794,9 @@ public:
         pushButton_goBacktoMenu->setText(QApplication::translate("MainWindow", "Go Back", 0));
         label_2->setText(QApplication::translate("MainWindow", "The Sales Report", 0));
         pushButton_generateSales->setText(QApplication::translate("MainWindow", "Generate Sales Report", 0));
-        pushButton->setText(QApplication::translate("MainWindow", "Generate Item List", 0));
+        pushButton_generateItemList->setText(QApplication::translate("MainWindow", "Generate Item List", 0));
         label_11->setText(QApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-size:18pt; text-decoration: underline;\">Item List</span></p></body></html>", 0));
-        pushButton_2->setText(QApplication::translate("MainWindow", "Go Back", 0));
+        pushButton_backMenu->setText(QApplication::translate("MainWindow", "Go Back", 0));
         pushButton_addPurchase->setText(QApplication::translate("MainWindow", "Add Purchase", 0));
         label_8->setText(QApplication::translate("MainWindow", "Object Type :", 0));
         label_7->setText(QApplication::translate("MainWindow", "Date :", 0));
@@ -806,13 +806,13 @@ public:
         priceLineEdit->setText(QApplication::translate("MainWindow", "$", 0));
         label_9->setText(QApplication::translate("MainWindow", "Price :", 0));
         label_10->setText(QApplication::translate("MainWindow", "Quantity :", 0));
-        pushButton_3->setText(QApplication::translate("MainWindow", "View All Purchases", 0));
-        pushButton_9->setText(QApplication::translate("MainWindow", "Renew as Executive Member", 0));
-        pushButton_7->setText(QApplication::translate("MainWindow", "Renew as normal member", 0));
+        pushButton_viewAllPurchases->setText(QApplication::translate("MainWindow", "View All Purchases", 0));
+        pushButton_renewExec->setText(QApplication::translate("MainWindow", "Renew as Executive Member", 0));
+        pushButton_renewNormal->setText(QApplication::translate("MainWindow", "Renew as normal member", 0));
+        pushButton_generateExpDate->setText(QApplication::translate("MainWindow", "Generate Expiration Date List", 0));
         label_13->setText(QApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-size:18pt; text-decoration: underline;\">Expiration Data</span></p></body></html>", 0));
-        pushButton_5->setText(QApplication::translate("MainWindow", "Generate Expiration Date List", 0));
-        pushButton_6->setText(QApplication::translate("MainWindow", "Inspect Member", 0));
-        pushButton_4->setText(QApplication::translate("MainWindow", "Return to Main Menu", 0));
+        pushButton_inspectMember->setText(QApplication::translate("MainWindow", "Inspect Member", 0));
+        pushButton_backToMain->setText(QApplication::translate("MainWindow", "Return to Main Menu", 0));
         menuAbout->setTitle(QApplication::translate("MainWindow", "About", 0));
     } // retranslateUi
 

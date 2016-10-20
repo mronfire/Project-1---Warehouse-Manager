@@ -8,9 +8,10 @@
 #include "ui_mainwindow.h"
 #include <QMessageBox>
 
-/*
- * This is the constructor for the mainWindows class. It will create the
- *  member list and the days list and also read the purchases for all days
+//! The constructor
+/*!
+ * \brief It will create the main window, plus create the list of members and days
+ * \param parent
  */
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -22,9 +23,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ReadPurchases(purchFile ,memberList, dayList);
 }
 
-/*
- * This is the destructor for the mainWindows class. It will save all data
- *  before deleting members first and then days
+//! The Destructor
+/*!
+ * \brief This will save all data, eliminate all members and days and the ui
  */
 MainWindow::~MainWindow()
 {
@@ -35,9 +36,13 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-/*
- * This login widget logins if the username and password are correct, which then
- *  will take you into the user stacked widget
+//! Login button
+/*!
+ * \brief It will let you log in into the program
+ *
+ * \details It will requiere the user to enter a username and password
+ *           if correct, then it will proceed, otherwise it will prompt
+ *           user that username or password is incorrect
  */
 void MainWindow::on_loginButton_clicked()
 {
@@ -64,8 +69,11 @@ void MainWindow::on_loginButton_clicked()
     }
 }
 
-/*
- * This buttom will close the program properly and save all data
+//! The close button
+/*!
+ * \brief The close button, to exit program
+ *
+ * \details This will close the program, but before save all data
  */
 void MainWindow::on_closeButton_clicked()
 {
@@ -73,10 +81,13 @@ void MainWindow::on_closeButton_clicked()
     this->close();
 }
 
-/*
- * This buttom will add the members after they input all information needed.
- *  It should prompt user if a field is missing or if member name or id is
- *  already in the system
+//! The add member button
+/*!
+ * \brief This button will add members to the list
+ *
+ * \details This will add members to the list. It requieres the user
+ *          to enter a name, id, membership type, and date. If fields
+ *          are empty it should prompt the user to enter all fields.
  */
 void MainWindow::on_addButton_clicked()
 {
@@ -91,12 +102,12 @@ void MainWindow::on_addButton_clicked()
 
     if(ui->radioButton_execituveType->isChecked())
     {
-        QMessageBox::information(this, "Title", "The member is executive!!"); //just for testing
+        //QMessageBox::information(this, "Title", "The member is executive!!"); //just for testing
         myMember->SetType(true);
     }
     else
     {
-        QMessageBox::information(this, "Title", "The member is NOT executive!!"); //just for testing
+        //QMessageBox::information(this, "Title", "The member is NOT executive!!"); //just for testing
         myMember->SetType(false);
     }
 
@@ -126,18 +137,19 @@ void MainWindow::on_addButton_clicked()
     ui->lineEdit_Date->clear();
 }
 
-/*
- * This buttom will remove the member especified by the user and either open
- *  up another window showing the information about that user being eliminated,
- *  or just show in a QMessage box, that a member has being eliminated
+//! The remove button
+/*!
+ * \brief This button will remove a member from the list
+ *
+ * \details It will allow us to remove a member from the list, base on the
+ *          especifications entered by the user. It will find the member on
+ *          the list and eliminate it.
  */
 void MainWindow::on_removeButton_clicked()
 {
-    //work on this******
     QString numID;
     member *myMember = memberList;
     member *prevMember = memberList;
-
 
     numID = ui->lineEdit_numberID->text();
 
@@ -173,44 +185,49 @@ void MainWindow::on_removeButton_clicked()
     ui->lineEdit_Date->clear();
 }
 
-/*
- * This buttom will take you to the view members page
+//! The view button
+/*!
+ * \brief This button will let you view all members
  */
 void MainWindow::on_viewButton_clicked()
 {
     ui->stackedWidget->setCurrentWidget(ui->viewMembersPage);
 }
 
-/*
- * This buttom will take you back to the main member page from the view member page
+//! The go back button
+/*!
+ * \brief This button will let you go back to main menu
  */
 void MainWindow::on_pushButton_goBack_clicked()
 {
     ui->stackedWidget->setCurrentWidget(ui->memberPage);
 
-    ui->listWidget_members->clear(); //clears the list widget
-    ui->listWidget_memPurch->clear();
+    ui->listWidget_members->clear();   //clears the list widget
+    ui->listWidget_memPurch->clear();  //clears the purchase list
 }
 
-/*
- * This buttom will take you back to the main menu from the member page
-*/
+//! The return to menu button
+/*!
+ * \brief This buttom takes you to main menu from member page
+ */
 void MainWindow::on_pushButton_returnToMenu_clicked()
 {
     ui->stackedWidget->setCurrentWidget(ui->menuPage);
 }
 
-/*
- * This buttom will take you to member page from the main menu
+//! The take me to add members button
+/*!
+ * \brief This button will take you to the member page
  */
 void MainWindow::on_pushButton_addMembers_clicked()
 {
     ui->stackedWidget->setCurrentWidget(ui->memberPage);
 }
 
-/*
- * This buttom will take you back to the main menu from the sales report page
-*/
+//! The go back to menu button 2
+/*!
+ * \brief This buttom takes you to main menu from sales report
+ */
 void MainWindow::on_pushButton_goBacktoMenu_clicked()
 {
     ui->stackedWidget->setCurrentWidget(ui->menuPage);
@@ -218,16 +235,18 @@ void MainWindow::on_pushButton_goBacktoMenu_clicked()
     ui->listWidget_salesReport->clear(); //clears the list widget
 }
 
-/*
- * This buttom will take you to sales report page from the main menu
+//! The sales report button
+/*!
+ * \brief This buttom takes you to sales report page
  */
 void MainWindow::on_pushButton_2_salesReport_clicked()
 {
     ui->stackedWidget->setCurrentWidget(ui->salesReportPage);
 }
 
-/*
- * This buttom will generate the list of members and display it
+//! The generate list button
+/*!
+ * \brief This buttom will generate the list of members
  */
 void MainWindow::on_pushButton_generateList_clicked()
 {
@@ -256,8 +275,9 @@ void MainWindow::on_pushButton_generateList_clicked()
     }
 }
 
-/*
- * This buttom will switch the members account, either to normal or executive member
+//! The switch account button
+/*!
+ * \brief This buttom will switch the account type
  */
 void MainWindow::on_pushButton_switchAccount_clicked()
 {
@@ -326,8 +346,9 @@ void MainWindow::on_pushButton_switchAccount_clicked()
     }
 }
 
-/*
- * This buttom will generate the list of sales report and display it
+//! The generate sales button
+/*!
+ * \brief This buttom will generate the sales report list
  */
 void MainWindow::on_pushButton_generateSales_clicked()
 {
@@ -379,32 +400,36 @@ void MainWindow::on_pushButton_generateSales_clicked()
     }
 }
 
-/*
- * This buttom will exit the program from the main menu
+//! The exit program button
+/*!
+ * \brief This buttom will quit the program
  */
 void MainWindow::on_pushButton_exitProgram_clicked()
 {
     this->close();
 }
 
-/*
- * This buttom will take you the add purchases page
+//! The add purchases page button
+/*!
+ * \brief This buttom will take you to the add purchases page
  */
 void MainWindow::on_pushButton_addPurchasesPage_clicked()
 {
     ui->stackedWidget->setCurrentWidget(ui->AddPuchasePage);
 }
 
-/*
- * This buttom will take you back to the main menu from add purchases page
+//! The back to menu 3 button
+/*!
+ * \brief This buttom takes you back to main menu from purchases page
  */
 void MainWindow::on_pushButton_backToMenu_clicked()
 {
     ui->stackedWidget->setCurrentWidget(ui->menuPage);
 }
 
-/*
- * This buttom add members to the list
+//! The add purchase button
+/*!
+ * \brief This buttom will add purchases to the list
  */
 void MainWindow::on_pushButton_addPurchase_clicked()
 {
@@ -465,22 +490,38 @@ void MainWindow::on_pushButton_addPurchase_clicked()
     ui->quantLineEdit->clear();
 }
 
+//! The remove purchase button
+/*!
+ * \brief This buttom removes purchases from the list
+ */
 void MainWindow::on_pushButton_removePurchase_clicked()
 {
     //work on this
 }
 
-void MainWindow::on_pushButton_3_clicked()
+//! The view all purchases button
+/*!
+ * \brief This buttom lets you view all purchases made
+ */
+void MainWindow::on_pushButton_viewAllPurchases_clicked()
 {
     ui->stackedWidget->setCurrentWidget(ui->PurchViewPage);
 }
 
-void MainWindow::on_pushButton_2_clicked()
+//! The back to menu button
+/*!
+ * \brief This buttom takes you back to menu
+ */
+void MainWindow::on_pushButton_backMenu_clicked()
 {
     ui->stackedWidget->setCurrentWidget(ui->AddPuchasePage);
 }
 
-void MainWindow::on_pushButton_clicked()
+//! The generate item list button
+/*!
+ * \brief This buttom will generate the item list
+ */
+void MainWindow::on_pushButton_generateItemList_clicked()
 {
     Purchase *purchList = NULL;
     Purchase *purchptr;
@@ -547,19 +588,31 @@ void MainWindow::on_pushButton_clicked()
     }
 }
 
-void MainWindow::on_pushButton_4_clicked()
+//! The back to main button
+/*!
+ * \brief This buttom takes you back to main menu
+ */
+void MainWindow::on_pushButton_backToMain_clicked()
 {
     ui->stackedWidget->setCurrentWidget(ui->menuPage);
     ui->listWidget_expMem->clear();
     ui->listWidget_expMemPlus->clear();
 }
 
-void MainWindow::on_pushButton_8_clicked()
+//! The renew membership button
+/*!
+ * \brief This buttom will take you to date expiration page
+ */
+void MainWindow::on_pushButton_renewMembership_clicked()
 {
     ui->stackedWidget->setCurrentWidget(ui->ExpirationPage);
 }
 
-void MainWindow::on_pushButton_5_clicked()
+//! The generate expiration date button
+/*!
+ * \brief This buttom will generate the expiration dates from members
+ */
+void MainWindow::on_pushButton_generateExpDate_clicked()
 {
     ui->listWidget_expMem->clear();
 
@@ -572,7 +625,11 @@ void MainWindow::on_pushButton_5_clicked()
     }
 }
 
-void MainWindow::on_pushButton_6_clicked()
+//! The inspect member button
+/*!
+ * \brief This buttom will inspect selected member and display info
+ */
+void MainWindow::on_pushButton_inspectMember_clicked()
 {
     QListWidgetItem *item = ui->listWidget_expMem->currentItem();
 
@@ -622,7 +679,11 @@ void MainWindow::on_pushButton_6_clicked()
     }
 }
 
-void MainWindow::on_pushButton_7_clicked()
+//! The renew to normal button
+/*!
+ * \brief This buttom will let you switch an member account to normal
+ */
+void MainWindow::on_pushButton_renewNormal_clicked()
 {
     QListWidgetItem *item = ui->listWidget_expMem->currentItem();
     if(item != NULL)
@@ -662,11 +723,15 @@ void MainWindow::on_pushButton_7_clicked()
         delete memptr;
 
     }
-    on_pushButton_6_clicked();
-    on_pushButton_5_clicked();
+    on_pushButton_inspectMember_clicked();
+    on_pushButton_generateExpDate_clicked();
 }
 
-void MainWindow::on_pushButton_9_clicked()
+//! The renew to executive button
+/*!
+ * \brief This buttom will let you switch an member account to executive
+ */
+void MainWindow::on_pushButton_renewExec_clicked()
 {
     QListWidgetItem *item = ui->listWidget_expMem->currentItem();
     if(item != NULL)
@@ -706,6 +771,6 @@ void MainWindow::on_pushButton_9_clicked()
         delete memptr;
 
     }
-    on_pushButton_6_clicked();
-    on_pushButton_5_clicked();
+    on_pushButton_inspectMember_clicked();
+    on_pushButton_generateExpDate_clicked();
 }

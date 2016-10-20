@@ -156,6 +156,16 @@ void SalesDay::SetNextDay(SalesDay *a)
     tomorrow = a;
 }
 
+Purchase SalesDay::GetLastPurchase()
+{
+    return lastPurchase;
+}
+
+void SalesDay::SetLastPurchase(Purchase *newLast)
+{
+    lastPurchase = newLast;
+}
+
 void SalesDay::AddPurchase(Purchase *a, member *memList)
 {
     member *customer;

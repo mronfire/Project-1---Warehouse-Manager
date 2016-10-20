@@ -496,7 +496,107 @@ void MainWindow::on_pushButton_addPurchase_clicked()
  */
 void MainWindow::on_pushButton_removePurchase_clicked()
 {
-    //work on this
+    QString date = ui->dateLineEdit->text();
+    QString memNum = ui->nameLineEdit->text();
+    QString objType = ui->objTypeLineEdit->text();
+
+    SalesDay *dayptr = dayList;
+    member *memptr = memberList->GetThisMember(memNum);
+
+    bool failFlag = false;
+    bool foundFlag = false;
+
+    while(dayptr->GetDate() != date && dayptr->GetNextDay() != NULL)
+    {
+        dayptr = dayptr->GetNextDay();
+    }
+
+    if(memptr == NULL)
+    {
+        failFlag = true;
+        QMessageBox::critical(this, "Error", "No such member exists");
+    }
+
+    if(!failFlag)
+    {
+        Purchase *purchptr;
+        Purchase *prevDay = dayptr->GetFirstPurchase();
+        Purchase *prevMem = memptr->GetFirstPurchase();
+
+        if(prevDay->getMemberNum() == memNum && prevDay->getObjType() == objType)
+        {
+            purchptr = prevDay;
+            foundFlag = true;
+            dayptr->SetFirstPurchase(purchptr->getNextDay());
+            if(dayptr->GetLastPurchase() == purchptr)
+            {
+                dayptr->SetLastPurchase(purchptr->getNextDay());
+            }
+        }
+        else
+        {
+            while(!foundFlag && prevDay->getNextDay() != NULL)
+            {
+                if(prevDay->getNextDay()->getMemberNum() == memNum && prevDay->getNextDay()->getObjType() == objType)
+                {
+                    purchptr = prevDay->getNextDay();
+                    foundFlag = true;
+                    prevDay->setNextDay(purchptr->getNextDay());
+                    if(dayptr->GetLastPurchase() == purchptr)
+                    {
+                        dayptr->SetLastPurchase(purchptr->getNextDay());
+                    }
+                }
+                prevDay = prevDay->getNextDay();
+            }
+
+            if(!foundFlag)
+            {
+                failFlag = true;
+                QMessageBox::critical(this, "Error", "No such purchase on date " + date);
+            }
+        }
+
+        if(!failFlag)
+        {
+            if(memptr->GetFirstPurchase() == purchptr)
+            {
+                memptr->SetFirstPurchase(purchptr->getNextMember());
+                if(memptr->GetLastPurchase() == purchptr)
+                {
+                    memptr->SetLastPurchase(purchptr->getNextMember());
+                }
+            }
+            else
+            {
+                foundFlag = false;
+
+                while(!foundFlag && prevMem->getNextMember() != NULL)
+                {
+                    if(prevMem->getNextMember() == purchptr)
+                    {
+                        foundFlag = true;
+                        prevMem->setNextMember(purchptr->getNextMember());
+                        if(memptr->GetLastPurchase() == purchptr)
+                        {
+                            memptr->SetLastPurchase(purchptr->getNextMember());
+                        }
+                    }
+                    prevMem = prevMem->getNextMember();
+                }
+            }
+
+            delete purchptr;
+            QMessageBox::critical(this, "Success!", "Deleting purchase of " + objType);
+        }
+    }
+
+    //clears all fields
+    ui->dateLineEdit->clear();
+    ui->nameLineEdit->clear();
+    ui->objTypeLineEdit->clear();
+    ui->priceLineEdit->setText("$");
+    ui->quantLineEdit->clear();
 }
 
 //! The view all purchases button

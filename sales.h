@@ -27,6 +27,7 @@ public:
     SalesDay(SalesDay *a);
     SalesDay *GetNextDay();
     Purchase *GetFirstPurchase();
+    Purchase *GetLastPurchase();
     QString GetDate();
     int GetMem();
     int GetExec();
@@ -36,6 +37,7 @@ public:
     void MemberCount(bool member);
     void AddPurchase(Purchase *a, member *memList);
     void SetFirstPurchase(Purchase *newFirst);
+    void SetLastPurchase(Purchase *newLast);
     void SetNextDay(SalesDay *a);
     void Print();
     ~SalesDay();

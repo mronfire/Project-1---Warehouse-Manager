@@ -466,3 +466,79 @@ void MainWindow::on_pushButton_removePurchase_clicked()
 {
     //work on this
 }
+
+void MainWindow::on_pushButton_3_clicked()
+{
+    ui->stackedWidget->setCurrentWidget(ui->PurchViewPage);
+}
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    ui->stackedWidget->setCurrentWidget(ui->AddPuchasePage);
+}
+
+void MainWindow::on_pushButton_clicked()
+{
+    Purchase *purchList = NULL;
+    Purchase *purchptr;
+    Purchase *purchNav;
+    SalesDay *dayptr = dayList;
+    bool isNewItem;
+
+    while(dayptr != NULL) //reads in all our purchases into a new list
+    {
+        purchptr = dayptr->GetFirstPurchase();
+
+        while(purchptr != NULL) //if there are purchases in this day
+        {
+            if(purchList == NULL) //if there is nothin gin purchase list, 1st time only
+            {
+                purchList = new Purchase(purchptr);
+            }
+            else //if we have a purch list
+            {
+                isNewItem = true;
+                purchNav = purchList;
+                while(purchNav->getNextDay() != NULL && isNewItem) //while we are still navigating purchlist and has not found one of our item
+                {
+                    if(purchNav->getObjType() == purchptr->getObjType())
+                    {
+                        isNewItem = false; //item is not first of its kind
+                    }
+                    else
+                    {
+                        purchNav = purchNav->getNextDay(); //move through list
+                    }
+                }
+                if(!isNewItem)
+                {
+                    purchNav->setObjQuantity(purchNav->getObjQuantity() + purchptr->getObjQuantity()); //add to existing number
+                }
+                else
+                {
+                    purchNav->setNextDay(new Purchase(purchptr)); //add to end of list
+                } //using next day for next purchase, purchases have no day or member here
+            }
+            purchptr = purchptr->getNextDay(); //point to next purchase in day
+        }
+
+        dayptr = dayptr->GetNextDay(); //point to next day
+    }
+
+    purchptr = purchList;//point to start of list
+    while(purchptr != NULL) //while we are not through list
+    {
+        ui->listWidget_Items->addItem("Sale of : " + purchptr->getObjType());
+        ui->listWidget_Items->addItem("Quantity: " + QString::number(purchptr->getObjQuantity()));
+        ui->listWidget_Items->addItem("Revenue : $" + QString::number(purchptr->getObjQuantity() * purchptr->getObjPrice(), 'f', 2));
+
+        purchptr = purchptr->getNextDay();
+    }
+
+    while(purchList != NULL)//deletes list of purchases
+    {
+        purchptr = purchList->getNextDay();
+        delete purchList;
+        purchList = purchptr;
+    }
+}

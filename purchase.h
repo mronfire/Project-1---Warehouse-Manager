@@ -18,6 +18,7 @@ public:
     Purchase();
     Purchase(QString num, QString type, float cost, int amount,
                   QString date);
+    Purchase(Purchase *purchToCopy);
 
     //MUTATRORS
     void setMemberNum(QString num);

@@ -53,6 +53,12 @@ private slots:
     void on_pushButton_removePurchase_clicked();     /*!< This buttom removes purchase */
 
 
+    void on_pushButton_3_clicked();
+
+    void on_pushButton_2_clicked();
+
+    void on_pushButton_clicked();
+
 private:
     Ui::MainWindow *ui;                              /*!< A MainWindow pointer to UI */
 

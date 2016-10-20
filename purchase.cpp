@@ -29,6 +29,17 @@ Purchase::Purchase(QString num, QString type, float cost, int amount,
     nextDay      = NULL;
 }
 
+Purchase::Purchase(Purchase *purchToCopy)
+{
+    memberNum    = purchToCopy->getMemberNum();
+    objectType   = purchToCopy->getObjType();
+    price        = purchToCopy->getObjPrice();
+    quantity     = purchToCopy->getObjQuantity();
+    purchaseDate = purchToCopy->getPurchaseDate();
+    nextMember   = NULL;
+    nextDay      = NULL;
+}
+
 void Purchase::setMemberNum(QString num)
 {
     memberNum = num;

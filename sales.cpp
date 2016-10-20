@@ -156,7 +156,7 @@ void SalesDay::SetNextDay(SalesDay *a)
     tomorrow = a;
 }
 
-Purchase SalesDay::GetLastPurchase()
+Purchase *SalesDay::GetLastPurchase()
 {
     return lastPurchase;
 }

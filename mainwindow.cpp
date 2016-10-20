@@ -189,6 +189,7 @@ void MainWindow::on_pushButton_goBack_clicked()
     ui->stackedWidget->setCurrentWidget(ui->memberPage);
 
     ui->listWidget_members->clear(); //clears the list widget
+    ui->listWidget_memPurch->clear();
 }
 
 /*
@@ -260,7 +261,6 @@ void MainWindow::on_pushButton_generateList_clicked()
  */
 void MainWindow::on_pushButton_switchAccount_clicked()
 {
-
     QListWidgetItem *item = ui->listWidget_members->currentItem();
 
     ui->listWidget_memPurch->clear();
@@ -280,7 +280,10 @@ void MainWindow::on_pushButton_switchAccount_clicked()
             purchptr = memptr->GetFirstPurchase();
             ui->listWidget_memPurch->addItem("Member : " + name);
             ui->listWidget_memPurch->addItem("Number : " + memNum);
-            ui->listWidget_memPurch->addItem("Spent  : $" + QString::number(memSpent, 'f', 2));
+            ui->listWidget_memPurch->addItem("Total Spent:");
+            ui->listWidget_memPurch->addItem("Before Tax : $" + QString::number(memSpent, 'f', 2));
+            memSpent = memptr->GetTaxSpent();
+            ui->listWidget_memPurch->addItem("After Tax : $" + QString::number(memSpent, 'f', 2));
 
             if(memptr->GetType())
             {
@@ -319,7 +322,7 @@ void MainWindow::on_pushButton_switchAccount_clicked()
     }
     else
     {
-        ui->listWidget_memPurch->addItem("There are no member selected!!!");
+        ui->listWidget_memPurch->addItem("There is no member selected!!!");
     }
 }
 
@@ -528,6 +531,7 @@ void MainWindow::on_pushButton_clicked()
     purchptr = purchList;//point to start of list
     while(purchptr != NULL) //while we are not through list
     {
+        ui->listWidget_ItemsSimple->addItem(purchptr->getObjType());
         ui->listWidget_Items->addItem("Sale of : " + purchptr->getObjType());
         ui->listWidget_Items->addItem("Quantity: " + QString::number(purchptr->getObjQuantity()));
         ui->listWidget_Items->addItem("Revenue : $" + QString::number(purchptr->getObjQuantity() * purchptr->getObjPrice(), 'f', 2));
@@ -541,4 +545,167 @@ void MainWindow::on_pushButton_clicked()
         delete purchList;
         purchList = purchptr;
     }
+}
+
+void MainWindow::on_pushButton_4_clicked()
+{
+    ui->stackedWidget->setCurrentWidget(ui->menuPage);
+    ui->listWidget_expMem->clear();
+    ui->listWidget_expMemPlus->clear();
+}
+
+void MainWindow::on_pushButton_8_clicked()
+{
+    ui->stackedWidget->setCurrentWidget(ui->ExpirationPage);
+}
+
+void MainWindow::on_pushButton_5_clicked()
+{
+    ui->listWidget_expMem->clear();
+
+    member *memptr = memberList;
+
+    while(memptr != NULL)
+    {
+        ui->listWidget_expMem->addItem(memptr->GetNumber() + ": " + memptr->GetName() + ": " + memptr->GetExpiration());
+        memptr = memptr->GetNextMember();
+    }
+}
+
+void MainWindow::on_pushButton_6_clicked()
+{
+    QListWidgetItem *item = ui->listWidget_expMem->currentItem();
+
+    ui->listWidget_expMemPlus->clear();
+
+    if(item != NULL)
+    {
+        QString memNum = item->text().left(5);
+        member *memptr = memberList->GetThisMember(memNum);
+        QString name;
+        QString date;
+
+        if(memptr != NULL)
+        {
+            name = memptr->GetName();
+            date = memptr->GetExpiration();
+            ui->listWidget_expMemPlus->addItem("Member : " + name);
+            ui->listWidget_expMemPlus->addItem("Number : " + memNum);
+            ui->listWidget_expMemPlus->addItem("Expiration Date: " + date);
+
+            if(memptr->GetType())
+            {
+                ExecClass *execptr = dynamic_cast<ExecClass*>(memptr);
+                float memRebate = execptr->GetRebate();
+
+                ui->listWidget_expMemPlus->addItem(name + " is an Executive Member!");
+                ui->listWidget_expMemPlus->addItem("Cost to Renew: $95");
+                if(memptr->isWrongType())
+                {
+                    ui->listWidget_expMemPlus->addItem("You could save $" + QString::number(10 - memRebate, 'f', 2) + " if you switched to a normal membership!");
+                }
+            }
+            else
+            {
+                ui->listWidget_expMemPlus->addItem(name + " is an Normal Member!");
+                ui->listWidget_expMemPlus->addItem("Cost to Renew: $85");
+                if(memptr->isWrongType())
+                {
+                    ui->listWidget_expMemPlus->addItem("You could save $" + QString::number((memptr->GetSpent()*REBATE_RATE) - 10, 'f', 2) + " if you switched to an Executive membership!");
+                }
+            }
+        }
+    }
+    else
+    {
+        ui->listWidget_expMemPlus->addItem("There is no member selected!!!");
+    }
+}
+
+void MainWindow::on_pushButton_7_clicked()
+{
+    QListWidgetItem *item = ui->listWidget_expMem->currentItem();
+    if(item != NULL)
+    {
+        QString memNum = item->text().left(5);
+        member *memptr = memberList->GetThisMember(memNum); //gets our member to renew
+        QString name = memptr->GetName();
+        QString num = memptr->GetNumber();
+        QString date = memptr->GetExpiration();
+        date = date.left(6) + QString::number(date.right(4).toInt() + 1); //adds one year to exp date
+        Purchase *purchptr = memptr->GetFirstPurchase();
+
+        member *renewMember = new member(name, num, false, date); //constructs replacement member
+
+        while(purchptr != NULL)
+        {
+            renewMember->AddPurchase(purchptr);
+            purchptr = purchptr->getNextMember();
+        }
+
+        memberList->AddToMemberList(renewMember); //adds it to end of list
+
+        member *prevMember = memberList; //from here on out, we remove the old copy of the member from the list
+
+        if(memptr == memberList)
+        {
+            memberList = memptr->GetNextMember();
+        }
+        else
+        {
+            while(prevMember->GetNextMember() != memptr)
+            {
+                prevMember = prevMember->GetNextMember();
+            }
+            prevMember->SetNextMember(memptr->GetNextMember());
+        }
+        delete memptr;
+
+    }
+    on_pushButton_6_clicked();
+    on_pushButton_5_clicked();
+}
+
+void MainWindow::on_pushButton_9_clicked()
+{
+    QListWidgetItem *item = ui->listWidget_expMem->currentItem();
+    if(item != NULL)
+    {
+        QString memNum = item->text().left(5);
+        member *memptr = memberList->GetThisMember(memNum); //gets our member to renew
+        QString name = memptr->GetName();
+        QString num = memptr->GetNumber();
+        QString date = memptr->GetExpiration();
+        date = date.left(6) + QString::number(date.right(4).toInt() + 1); //adds one year to exp date
+        Purchase *purchptr = memptr->GetFirstPurchase();
+
+        member *renewMember = new ExecClass(name, num, true, date); //constructs replacement member
+
+        while(purchptr != NULL)
+        {
+            renewMember->AddPurchase(purchptr);
+            purchptr = purchptr->getNextMember();
+        }
+
+        memberList->AddToMemberList(renewMember); //adds it to end of list
+
+        member *prevMember = memberList; //from here on out, we remove the old copy of the member from the list
+
+        if(memptr == memberList)
+        {
+            memberList = memptr->GetNextMember();
+        }
+        else
+        {
+            while(prevMember->GetNextMember() != memptr)
+            {
+                prevMember = prevMember->GetNextMember();
+            }
+            prevMember->SetNextMember(memptr->GetNextMember());
+        }
+        delete memptr;
+
+    }
+    on_pushButton_6_clicked();
+    on_pushButton_5_clicked();
 }

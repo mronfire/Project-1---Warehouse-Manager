@@ -17,7 +17,6 @@
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
-#include <QtWidgets/QListView>
 #include <QtWidgets/QListWidget>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
@@ -55,18 +54,20 @@ public:
     QWidget *menuPage;
     QGridLayout *gridLayout_9;
     QGridLayout *gridLayout_8;
-    QLabel *label;
-    QLabel *label_3_sales;
-    QLabel *label_4;
-    QLabel *label_2_addMember;
+    QLabel *label_menuHeader;
+    QPushButton *pushButton_addPurchasesPage;
+    QLabel *label_5;
     QSpacerItem *verticalSpacer_6;
+    QLabel *label_2_addMember;
+    QLabel *label_4;
+    QLabel *label_3_sales;
+    QLabel *label;
     QPushButton *pushButton_exitProgram;
     QPushButton *pushButton_2_salesReport;
     QPushButton *pushButton_addMembers;
     QSpacerItem *verticalSpacer_7;
-    QLabel *label_menuHeader;
-    QPushButton *pushButton_addPurchasesPage;
-    QLabel *label_5;
+    QPushButton *pushButton_8;
+    QLabel *label_12;
     QWidget *memberPage;
     QGridLayout *gridLayout_5;
     QGridLayout *gridLayout_2;
@@ -104,23 +105,14 @@ public:
     QListWidget *listWidget_salesReport;
     QLabel *label_2;
     QPushButton *pushButton_generateSales;
-    QWidget *page;
+    QWidget *PurchViewPage;
     QGridLayout *gridLayout_15;
     QGridLayout *gridLayout_14;
-    QListView *listView;
-    QLineEdit *lineEdit;
-    QLabel *label_13;
-    QLineEdit *lineEdit_2;
-    QLabel *label_12;
-    QLineEdit *lineEdit_3;
-    QLabel *label_14;
+    QListWidget *listWidget_ItemsSimple;
+    QListWidget *listWidget_Items;
     QPushButton *pushButton;
-    QSpacerItem *horizontalSpacer_8;
-    QPushButton *pushButton_2;
-    QSpacerItem *verticalSpacer_10;
-    QSpacerItem *horizontalSpacer_7;
     QLabel *label_11;
-    QSpacerItem *verticalSpacer_11;
+    QPushButton *pushButton_2;
     QWidget *AddPuchasePage;
     QGridLayout *gridLayout_13;
     QGridLayout *gridLayout_12;
@@ -141,6 +133,18 @@ public:
     QSpacerItem *verticalSpacer_9;
     QSpacerItem *horizontalSpacer_5;
     QSpacerItem *horizontalSpacer_6;
+    QPushButton *pushButton_3;
+    QWidget *ExpirationPage;
+    QGridLayout *gridLayout_17;
+    QGridLayout *gridLayout_16;
+    QListWidget *listWidget_expMemPlus;
+    QPushButton *pushButton_9;
+    QPushButton *pushButton_7;
+    QListWidget *listWidget_expMem;
+    QLabel *label_13;
+    QPushButton *pushButton_5;
+    QPushButton *pushButton_6;
+    QPushButton *pushButton_4;
     QMenuBar *menuBar;
     QMenu *menuAbout;
     QToolBar *mainToolBar;
@@ -241,39 +245,62 @@ public:
         gridLayout_8->setSpacing(6);
         gridLayout_8->setObjectName(QStringLiteral("gridLayout_8"));
         gridLayout_8->setSizeConstraint(QLayout::SetDefaultConstraint);
-        label = new QLabel(menuPage);
-        label->setObjectName(QStringLiteral("label"));
+        label_menuHeader = new QLabel(menuPage);
+        label_menuHeader->setObjectName(QStringLiteral("label_menuHeader"));
         QFont font1;
-        font1.setPointSize(10);
+        font1.setPointSize(12);
         font1.setBold(true);
+        font1.setUnderline(true);
         font1.setWeight(75);
-        label->setFont(font1);
+        label_menuHeader->setFont(font1);
+        label_menuHeader->setCursor(QCursor(Qt::ArrowCursor));
+        label_menuHeader->setLayoutDirection(Qt::LeftToRight);
 
-        gridLayout_8->addWidget(label, 4, 0, 1, 1);
+        gridLayout_8->addWidget(label_menuHeader, 0, 0, 1, 1);
 
-        label_3_sales = new QLabel(menuPage);
-        label_3_sales->setObjectName(QStringLiteral("label_3_sales"));
+        pushButton_addPurchasesPage = new QPushButton(menuPage);
+        pushButton_addPurchasesPage->setObjectName(QStringLiteral("pushButton_addPurchasesPage"));
 
-        gridLayout_8->addWidget(label_3_sales, 7, 0, 1, 1);
+        gridLayout_8->addWidget(pushButton_addPurchasesPage, 8, 1, 1, 1);
 
-        label_4 = new QLabel(menuPage);
-        label_4->setObjectName(QStringLiteral("label_4"));
+        label_5 = new QLabel(menuPage);
+        label_5->setObjectName(QStringLiteral("label_5"));
 
-        gridLayout_8->addWidget(label_4, 9, 0, 1, 1);
+        gridLayout_8->addWidget(label_5, 8, 0, 1, 1);
+
+        verticalSpacer_6 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        gridLayout_8->addItem(verticalSpacer_6, 11, 1, 1, 1);
 
         label_2_addMember = new QLabel(menuPage);
         label_2_addMember->setObjectName(QStringLiteral("label_2_addMember"));
 
         gridLayout_8->addWidget(label_2_addMember, 6, 0, 1, 1);
 
-        verticalSpacer_6 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+        label_4 = new QLabel(menuPage);
+        label_4->setObjectName(QStringLiteral("label_4"));
 
-        gridLayout_8->addItem(verticalSpacer_6, 10, 1, 1, 1);
+        gridLayout_8->addWidget(label_4, 10, 0, 1, 1);
+
+        label_3_sales = new QLabel(menuPage);
+        label_3_sales->setObjectName(QStringLiteral("label_3_sales"));
+
+        gridLayout_8->addWidget(label_3_sales, 7, 0, 1, 1);
+
+        label = new QLabel(menuPage);
+        label->setObjectName(QStringLiteral("label"));
+        QFont font2;
+        font2.setPointSize(10);
+        font2.setBold(true);
+        font2.setWeight(75);
+        label->setFont(font2);
+
+        gridLayout_8->addWidget(label, 4, 0, 1, 1);
 
         pushButton_exitProgram = new QPushButton(menuPage);
         pushButton_exitProgram->setObjectName(QStringLiteral("pushButton_exitProgram"));
 
-        gridLayout_8->addWidget(pushButton_exitProgram, 9, 1, 1, 1);
+        gridLayout_8->addWidget(pushButton_exitProgram, 10, 1, 1, 1);
 
         pushButton_2_salesReport = new QPushButton(menuPage);
         pushButton_2_salesReport->setObjectName(QStringLiteral("pushButton_2_salesReport"));
@@ -289,28 +316,15 @@ public:
 
         gridLayout_8->addItem(verticalSpacer_7, 0, 1, 1, 1);
 
-        label_menuHeader = new QLabel(menuPage);
-        label_menuHeader->setObjectName(QStringLiteral("label_menuHeader"));
-        QFont font2;
-        font2.setPointSize(12);
-        font2.setBold(true);
-        font2.setUnderline(true);
-        font2.setWeight(75);
-        label_menuHeader->setFont(font2);
-        label_menuHeader->setCursor(QCursor(Qt::ArrowCursor));
-        label_menuHeader->setLayoutDirection(Qt::LeftToRight);
+        pushButton_8 = new QPushButton(menuPage);
+        pushButton_8->setObjectName(QStringLiteral("pushButton_8"));
 
-        gridLayout_8->addWidget(label_menuHeader, 0, 0, 1, 1);
+        gridLayout_8->addWidget(pushButton_8, 9, 1, 1, 1);
 
-        pushButton_addPurchasesPage = new QPushButton(menuPage);
-        pushButton_addPurchasesPage->setObjectName(QStringLiteral("pushButton_addPurchasesPage"));
+        label_12 = new QLabel(menuPage);
+        label_12->setObjectName(QStringLiteral("label_12"));
 
-        gridLayout_8->addWidget(pushButton_addPurchasesPage, 8, 1, 1, 1);
-
-        label_5 = new QLabel(menuPage);
-        label_5->setObjectName(QStringLiteral("label_5"));
-
-        gridLayout_8->addWidget(label_5, 8, 0, 1, 1);
+        gridLayout_8->addWidget(label_12, 9, 0, 1, 1);
 
 
         gridLayout_9->addLayout(gridLayout_8, 1, 0, 1, 4);
@@ -506,86 +520,44 @@ public:
         gridLayout_11->addLayout(gridLayout_10, 0, 0, 1, 1);
 
         stackedWidget->addWidget(salesReportPage);
-        page = new QWidget();
-        page->setObjectName(QStringLiteral("page"));
-        gridLayout_15 = new QGridLayout(page);
+        PurchViewPage = new QWidget();
+        PurchViewPage->setObjectName(QStringLiteral("PurchViewPage"));
+        gridLayout_15 = new QGridLayout(PurchViewPage);
         gridLayout_15->setSpacing(6);
         gridLayout_15->setContentsMargins(11, 11, 11, 11);
         gridLayout_15->setObjectName(QStringLiteral("gridLayout_15"));
         gridLayout_14 = new QGridLayout();
         gridLayout_14->setSpacing(6);
         gridLayout_14->setObjectName(QStringLiteral("gridLayout_14"));
-        listView = new QListView(page);
-        listView->setObjectName(QStringLiteral("listView"));
+        listWidget_ItemsSimple = new QListWidget(PurchViewPage);
+        listWidget_ItemsSimple->setObjectName(QStringLiteral("listWidget_ItemsSimple"));
 
-        gridLayout_14->addWidget(listView, 2, 4, 1, 1);
+        gridLayout_14->addWidget(listWidget_ItemsSimple, 0, 0, 1, 1);
 
-        lineEdit = new QLineEdit(page);
-        lineEdit->setObjectName(QStringLiteral("lineEdit"));
+        listWidget_Items = new QListWidget(PurchViewPage);
+        listWidget_Items->setObjectName(QStringLiteral("listWidget_Items"));
 
-        gridLayout_14->addWidget(lineEdit, 5, 4, 1, 1);
-
-        label_13 = new QLabel(page);
-        label_13->setObjectName(QStringLiteral("label_13"));
-
-        gridLayout_14->addWidget(label_13, 6, 2, 1, 1);
-
-        lineEdit_2 = new QLineEdit(page);
-        lineEdit_2->setObjectName(QStringLiteral("lineEdit_2"));
-
-        gridLayout_14->addWidget(lineEdit_2, 6, 4, 1, 1);
-
-        label_12 = new QLabel(page);
-        label_12->setObjectName(QStringLiteral("label_12"));
-
-        gridLayout_14->addWidget(label_12, 5, 2, 1, 1);
-
-        lineEdit_3 = new QLineEdit(page);
-        lineEdit_3->setObjectName(QStringLiteral("lineEdit_3"));
-
-        gridLayout_14->addWidget(lineEdit_3, 7, 4, 1, 1);
-
-        label_14 = new QLabel(page);
-        label_14->setObjectName(QStringLiteral("label_14"));
-
-        gridLayout_14->addWidget(label_14, 7, 2, 1, 1);
-
-        pushButton = new QPushButton(page);
-        pushButton->setObjectName(QStringLiteral("pushButton"));
-
-        gridLayout_14->addWidget(pushButton, 8, 4, 1, 1);
-
-        horizontalSpacer_8 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        gridLayout_14->addItem(horizontalSpacer_8, 2, 5, 1, 1);
-
-        pushButton_2 = new QPushButton(page);
-        pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
-
-        gridLayout_14->addWidget(pushButton_2, 9, 4, 1, 1);
-
-        verticalSpacer_10 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-        gridLayout_14->addItem(verticalSpacer_10, 1, 4, 1, 1);
-
-        horizontalSpacer_7 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        gridLayout_14->addItem(horizontalSpacer_7, 2, 2, 1, 1);
-
-        label_11 = new QLabel(page);
-        label_11->setObjectName(QStringLiteral("label_11"));
-        label_11->setFont(font4);
-
-        gridLayout_14->addWidget(label_11, 0, 2, 1, 1);
-
-        verticalSpacer_11 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-        gridLayout_14->addItem(verticalSpacer_11, 10, 4, 1, 1);
+        gridLayout_14->addWidget(listWidget_Items, 0, 1, 1, 1);
 
 
         gridLayout_15->addLayout(gridLayout_14, 1, 0, 1, 1);
 
-        stackedWidget->addWidget(page);
+        pushButton = new QPushButton(PurchViewPage);
+        pushButton->setObjectName(QStringLiteral("pushButton"));
+
+        gridLayout_15->addWidget(pushButton, 2, 0, 1, 1);
+
+        label_11 = new QLabel(PurchViewPage);
+        label_11->setObjectName(QStringLiteral("label_11"));
+
+        gridLayout_15->addWidget(label_11, 0, 0, 1, 1);
+
+        pushButton_2 = new QPushButton(PurchViewPage);
+        pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
+
+        gridLayout_15->addWidget(pushButton_2, 3, 0, 1, 1);
+
+        stackedWidget->addWidget(PurchViewPage);
         AddPuchasePage = new QWidget();
         AddPuchasePage->setObjectName(QStringLiteral("AddPuchasePage"));
         gridLayout_13 = new QGridLayout(AddPuchasePage);
@@ -628,7 +600,7 @@ public:
         pushButton_backToMenu = new QPushButton(AddPuchasePage);
         pushButton_backToMenu->setObjectName(QStringLiteral("pushButton_backToMenu"));
 
-        gridLayout_12->addWidget(pushButton_backToMenu, 9, 2, 1, 1);
+        gridLayout_12->addWidget(pushButton_backToMenu, 10, 2, 1, 1);
 
         nameLineEdit = new QLineEdit(AddPuchasePage);
         nameLineEdit->setObjectName(QStringLiteral("nameLineEdit"));
@@ -662,7 +634,7 @@ public:
 
         verticalSpacer_8 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
-        gridLayout_12->addItem(verticalSpacer_8, 10, 2, 1, 1);
+        gridLayout_12->addItem(verticalSpacer_8, 11, 2, 1, 1);
 
         verticalSpacer_9 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
@@ -676,10 +648,68 @@ public:
 
         gridLayout_12->addItem(horizontalSpacer_6, 4, 3, 1, 1);
 
+        pushButton_3 = new QPushButton(AddPuchasePage);
+        pushButton_3->setObjectName(QStringLiteral("pushButton_3"));
+
+        gridLayout_12->addWidget(pushButton_3, 9, 2, 1, 1);
+
 
         gridLayout_13->addLayout(gridLayout_12, 0, 0, 1, 1);
 
         stackedWidget->addWidget(AddPuchasePage);
+        ExpirationPage = new QWidget();
+        ExpirationPage->setObjectName(QStringLiteral("ExpirationPage"));
+        gridLayout_17 = new QGridLayout(ExpirationPage);
+        gridLayout_17->setSpacing(6);
+        gridLayout_17->setContentsMargins(11, 11, 11, 11);
+        gridLayout_17->setObjectName(QStringLiteral("gridLayout_17"));
+        gridLayout_16 = new QGridLayout();
+        gridLayout_16->setSpacing(6);
+        gridLayout_16->setObjectName(QStringLiteral("gridLayout_16"));
+        listWidget_expMemPlus = new QListWidget(ExpirationPage);
+        listWidget_expMemPlus->setObjectName(QStringLiteral("listWidget_expMemPlus"));
+
+        gridLayout_16->addWidget(listWidget_expMemPlus, 1, 1, 1, 1);
+
+        pushButton_9 = new QPushButton(ExpirationPage);
+        pushButton_9->setObjectName(QStringLiteral("pushButton_9"));
+
+        gridLayout_16->addWidget(pushButton_9, 5, 1, 1, 1);
+
+        pushButton_7 = new QPushButton(ExpirationPage);
+        pushButton_7->setObjectName(QStringLiteral("pushButton_7"));
+
+        gridLayout_16->addWidget(pushButton_7, 5, 0, 1, 1);
+
+        listWidget_expMem = new QListWidget(ExpirationPage);
+        listWidget_expMem->setObjectName(QStringLiteral("listWidget_expMem"));
+
+        gridLayout_16->addWidget(listWidget_expMem, 1, 0, 1, 1);
+
+        label_13 = new QLabel(ExpirationPage);
+        label_13->setObjectName(QStringLiteral("label_13"));
+
+        gridLayout_16->addWidget(label_13, 0, 0, 1, 1);
+
+        pushButton_5 = new QPushButton(ExpirationPage);
+        pushButton_5->setObjectName(QStringLiteral("pushButton_5"));
+
+        gridLayout_16->addWidget(pushButton_5, 3, 0, 1, 2);
+
+        pushButton_6 = new QPushButton(ExpirationPage);
+        pushButton_6->setObjectName(QStringLiteral("pushButton_6"));
+
+        gridLayout_16->addWidget(pushButton_6, 4, 0, 1, 2);
+
+
+        gridLayout_17->addLayout(gridLayout_16, 0, 0, 1, 1);
+
+        pushButton_4 = new QPushButton(ExpirationPage);
+        pushButton_4->setObjectName(QStringLiteral("pushButton_4"));
+
+        gridLayout_17->addWidget(pushButton_4, 6, 0, 1, 1);
+
+        stackedWidget->addWidget(ExpirationPage);
 
         gridLayout_3->addWidget(stackedWidget, 0, 0, 1, 1);
 
@@ -720,7 +750,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        stackedWidget->setCurrentIndex(4);
+        stackedWidget->setCurrentIndex(7);
         listWidget_members->setCurrentRow(-1);
 
 
@@ -735,16 +765,18 @@ public:
         passwordlabel->setText(QApplication::translate("MainWindow", "Password:", 0));
         loginButton->setText(QApplication::translate("MainWindow", "Login", 0));
         closeButton->setText(QApplication::translate("MainWindow", "Exit Program", 0));
-        label->setText(QApplication::translate("MainWindow", "Please choose an option from the menu:", 0));
-        label_3_sales->setText(QApplication::translate("MainWindow", "2 - Produce a Sales Report", 0));
-        label_4->setText(QApplication::translate("MainWindow", "4 - Exit Program", 0));
-        label_2_addMember->setText(QApplication::translate("MainWindow", "1 - Add, Remove or View Members", 0));
-        pushButton_exitProgram->setText(QApplication::translate("MainWindow", "EXIT", 0));
-        pushButton_2_salesReport->setText(QApplication::translate("MainWindow", "GO", 0));
-        pushButton_addMembers->setText(QApplication::translate("MainWindow", "GO", 0));
         label_menuHeader->setText(QApplication::translate("MainWindow", "MAIN MENU", 0));
         pushButton_addPurchasesPage->setText(QApplication::translate("MainWindow", "GO", 0));
         label_5->setText(QApplication::translate("MainWindow", "3 - Add Purchases", 0));
+        label_2_addMember->setText(QApplication::translate("MainWindow", "1 - Add, Remove or View Members", 0));
+        label_4->setText(QApplication::translate("MainWindow", "5 - Exit Program", 0));
+        label_3_sales->setText(QApplication::translate("MainWindow", "2 - Produce a Sales Report", 0));
+        label->setText(QApplication::translate("MainWindow", "Please choose an option from the menu:", 0));
+        pushButton_exitProgram->setText(QApplication::translate("MainWindow", "EXIT", 0));
+        pushButton_2_salesReport->setText(QApplication::translate("MainWindow", "GO", 0));
+        pushButton_addMembers->setText(QApplication::translate("MainWindow", "GO", 0));
+        pushButton_8->setText(QApplication::translate("MainWindow", "GO", 0));
+        label_12->setText(QApplication::translate("MainWindow", "4 - Renew Membership", 0));
         label_Header->setText(QApplication::translate("MainWindow", "Enter Member Information", 0));
         label_numberID->setText(QApplication::translate("MainWindow", "Member Number ID", 0));
         label_executive->setText(QApplication::translate("MainWindow", "Executive Member", 0));
@@ -762,12 +794,9 @@ public:
         pushButton_goBacktoMenu->setText(QApplication::translate("MainWindow", "Go Back", 0));
         label_2->setText(QApplication::translate("MainWindow", "The Sales Report", 0));
         pushButton_generateSales->setText(QApplication::translate("MainWindow", "Generate Sales Report", 0));
-        label_13->setText(QApplication::translate("MainWindow", "TextLabel", 0));
-        label_12->setText(QApplication::translate("MainWindow", "TextLabel", 0));
-        label_14->setText(QApplication::translate("MainWindow", "TextLabel", 0));
-        pushButton->setText(QApplication::translate("MainWindow", "PushButton", 0));
-        pushButton_2->setText(QApplication::translate("MainWindow", "PushButton", 0));
-        label_11->setText(QApplication::translate("MainWindow", "Sales Report for a given date", 0));
+        pushButton->setText(QApplication::translate("MainWindow", "Generate Item List", 0));
+        label_11->setText(QApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-size:18pt; text-decoration: underline;\">Item List</span></p></body></html>", 0));
+        pushButton_2->setText(QApplication::translate("MainWindow", "Go Back", 0));
         pushButton_addPurchase->setText(QApplication::translate("MainWindow", "Add Purchase", 0));
         label_8->setText(QApplication::translate("MainWindow", "Object Type :", 0));
         label_7->setText(QApplication::translate("MainWindow", "Date :", 0));
@@ -777,6 +806,13 @@ public:
         priceLineEdit->setText(QApplication::translate("MainWindow", "$", 0));
         label_9->setText(QApplication::translate("MainWindow", "Price :", 0));
         label_10->setText(QApplication::translate("MainWindow", "Quantity :", 0));
+        pushButton_3->setText(QApplication::translate("MainWindow", "View All Purchases", 0));
+        pushButton_9->setText(QApplication::translate("MainWindow", "Renew as Executive Member", 0));
+        pushButton_7->setText(QApplication::translate("MainWindow", "Renew as normal member", 0));
+        label_13->setText(QApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-size:18pt; text-decoration: underline;\">Expiration Data</span></p></body></html>", 0));
+        pushButton_5->setText(QApplication::translate("MainWindow", "Generate Expiration Date List", 0));
+        pushButton_6->setText(QApplication::translate("MainWindow", "Inspect Member", 0));
+        pushButton_4->setText(QApplication::translate("MainWindow", "Return to Main Menu", 0));
         menuAbout->setTitle(QApplication::translate("MainWindow", "About", 0));
     } // retranslateUi
 

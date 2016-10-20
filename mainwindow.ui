@@ -24,7 +24,7 @@
     <item row="0" column="0">
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>5</number>
+       <number>7</number>
       </property>
       <widget class="QWidget" name="loginPage">
        <layout class="QGridLayout" name="gridLayout_4">
@@ -156,6 +156,75 @@
           <property name="sizeConstraint">
            <enum>QLayout::SetDefaultConstraint</enum>
           </property>
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_menuHeader">
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+              <weight>75</weight>
+              <bold>true</bold>
+              <underline>true</underline>
+             </font>
+            </property>
+            <property name="cursor">
+             <cursorShape>ArrowCursor</cursorShape>
+            </property>
+            <property name="layoutDirection">
+             <enum>Qt::LeftToRight</enum>
+            </property>
+            <property name="text">
+             <string>MAIN MENU</string>
+            </property>
+           </widget>
+          </item>
+          <item row="8" column="1">
+           <widget class="QPushButton" name="pushButton_addPurchasesPage">
+            <property name="text">
+             <string>GO</string>
+            </property>
+           </widget>
+          </item>
+          <item row="8" column="0">
+           <widget class="QLabel" name="label_5">
+            <property name="text">
+             <string>3 - Add Purchases</string>
+            </property>
+           </widget>
+          </item>
+          <item row="11" column="1">
+           <spacer name="verticalSpacer_6">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="6" column="0">
+           <widget class="QLabel" name="label_2_addMember">
+            <property name="text">
+             <string>1 - Add, Remove or View Members</string>
+            </property>
+           </widget>
+          </item>
+          <item row="10" column="0">
+           <widget class="QLabel" name="label_4">
+            <property name="text">
+             <string>5 - Exit Program</string>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="0">
+           <widget class="QLabel" name="label_3_sales">
+            <property name="text">
+             <string>2 - Produce a Sales Report</string>
+            </property>
+           </widget>
+          </item>
           <item row="4" column="0">
            <widget class="QLabel" name="label">
             <property name="font">
@@ -170,41 +239,7 @@
             </property>
            </widget>
           </item>
-          <item row="7" column="0">
-           <widget class="QLabel" name="label_3_sales">
-            <property name="text">
-             <string>2 - Produce a Sales Report</string>
-            </property>
-           </widget>
-          </item>
-          <item row="9" column="0">
-           <widget class="QLabel" name="label_4">
-            <property name="text">
-             <string>4 - Exit Program</string>
-            </property>
-           </widget>
-          </item>
-          <item row="6" column="0">
-           <widget class="QLabel" name="label_2_addMember">
-            <property name="text">
-             <string>1 - Add, Remove or View Members</string>
-            </property>
-           </widget>
-          </item>
           <item row="10" column="1">
-           <spacer name="verticalSpacer_6">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>20</width>
-              <height>40</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item row="9" column="1">
            <widget class="QPushButton" name="pushButton_exitProgram">
             <property name="text">
              <string>EXIT</string>
@@ -238,38 +273,17 @@
             </property>
            </spacer>
           </item>
-          <item row="0" column="0">
-           <widget class="QLabel" name="label_menuHeader">
-            <property name="font">
-             <font>
-              <pointsize>12</pointsize>
-              <weight>75</weight>
-              <bold>true</bold>
-              <underline>true</underline>
-             </font>
-            </property>
-            <property name="cursor">
-             <cursorShape>ArrowCursor</cursorShape>
-            </property>
-            <property name="layoutDirection">
-             <enum>Qt::LeftToRight</enum>
-            </property>
-            <property name="text">
-             <string>MAIN MENU</string>
-            </property>
-           </widget>
-          </item>
-          <item row="8" column="1">
-           <widget class="QPushButton" name="pushButton_addPurchasesPage">
+          <item row="9" column="1">
+           <widget class="QPushButton" name="pushButton_8">
             <property name="text">
              <string>GO</string>
             </property>
            </widget>
           </item>
-          <item row="8" column="0">
-           <widget class="QLabel" name="label_5">
+          <item row="9" column="0">
+           <widget class="QLabel" name="label_12">
             <property name="text">
-             <string>3 - Add Purchases</string>
+             <string>4 - Renew Membership</string>
             </property>
            </widget>
           </item>
@@ -544,26 +558,36 @@
       </widget>
       <widget class="QWidget" name="PurchViewPage">
        <layout class="QGridLayout" name="gridLayout_15">
-        <item row="0" column="0">
+        <item row="1" column="0">
          <layout class="QGridLayout" name="gridLayout_14">
-          <item row="1" column="0">
-           <widget class="QPushButton" name="pushButton">
-            <property name="text">
-             <string>Generate Item List</string>
-            </property>
-           </widget>
-          </item>
           <item row="0" column="0">
+           <widget class="QListWidget" name="listWidget_ItemsSimple"/>
+          </item>
+          <item row="0" column="1">
            <widget class="QListWidget" name="listWidget_Items"/>
           </item>
-          <item row="2" column="0">
-           <widget class="QPushButton" name="pushButton_2">
-            <property name="text">
-             <string>Go Back</string>
-            </property>
-           </widget>
-          </item>
          </layout>
+        </item>
+        <item row="2" column="0">
+         <widget class="QPushButton" name="pushButton">
+          <property name="text">
+           <string>Generate Item List</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QLabel" name="label_11">
+          <property name="text">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt; text-decoration: underline;&quot;&gt;Item List&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="QPushButton" name="pushButton_2">
+          <property name="text">
+           <string>Go Back</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </widget>
@@ -706,6 +730,62 @@
            </widget>
           </item>
          </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="ExpirationPage">
+       <layout class="QGridLayout" name="gridLayout_17">
+        <item row="0" column="0">
+         <layout class="QGridLayout" name="gridLayout_16">
+          <item row="1" column="1">
+           <widget class="QListWidget" name="listWidget_expMemPlus"/>
+          </item>
+          <item row="5" column="1">
+           <widget class="QPushButton" name="pushButton_9">
+            <property name="text">
+             <string>Renew as Executive Member</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="0">
+           <widget class="QPushButton" name="pushButton_7">
+            <property name="text">
+             <string>Renew as normal member</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QListWidget" name="listWidget_expMem"/>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_13">
+            <property name="text">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt; text-decoration: underline;&quot;&gt;Expiration Data&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0" colspan="2">
+           <widget class="QPushButton" name="pushButton_5">
+            <property name="text">
+             <string>Generate Expiration Date List</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="0" colspan="2">
+           <widget class="QPushButton" name="pushButton_6">
+            <property name="text">
+             <string>Inspect Member</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="6" column="0">
+         <widget class="QPushButton" name="pushButton_4">
+          <property name="text">
+           <string>Return to Main Menu</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </widget>

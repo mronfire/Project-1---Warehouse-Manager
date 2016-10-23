@@ -11,156 +11,159 @@
 #include "purchase.h"
 #include "member.h"
 
-//!
-//! \brief The SalesDay class contains the days a sale was made
-//!
+//! The SalesDay class
+/*!
+ * \brief The SalesDay class will keep track of the each day
+ * \details The SalesDay class will keep track of each day and the purchases that were made in that day
+ *          and will keep track of the total revenue of each day and how many members made purchases that day
+ */
 class SalesDay
 {
 private:
-    float revenue;              /*!< The revenue of purhcases for the day */
-    int numExec;                /*!< The number of executive members */
-    int numMem;                 /*!< The number of normal members */
-    QString date;               /*!< The date of purchase */
-    SalesDay *tomorrow;         /*!< Pointer to next day */
-    Purchase *firstPurchase;    /*!< Pointer to first purhcase of the day */
-    Purchase *lastPurchase;     /*!< Pointer to last purchase of the day */
+    float revenue;           /*! The revenue of the current day */
+    int numExec;             /*! The number of executives that made purchases on that day */
+    int numMem;              /*! The number of members that made purchases on that day */
+    QString date;            /*! The date */
+    SalesDay *tomorrow;      /*! Pointer that points to the next day */
+    Purchase *firstPurchase; /*! Pointer that points to the first purchase of the day */
+    Purchase *lastPurchase;  /*! Pointer that points to the last purchase of the day */
 public:
 
-    //! Default Constructor
+    //! The SalesDay default constructor
     /*!
-     * \brief The SalesDay constructor
+     * \brief This is the constructor of the SalesDay class
      */
     SalesDay();
 
-    //! Alternative Constructor
+    //! The SalesDay constructor
     /*!
-     * \brief The SalesDay alternative constructor will initialize all members using a list of parameters
-     * \param initRevenue
-     * \param initExec
-     * \param initMem
-     * \param initDate
-     * \param initTomorrow
-     * \param initFirst
-     * \param initLast
+     * \brief This is the constructor of the SalesDay class that takes in a list of parameters
+     * \param initRevenue  initializes the revenue of the day
+     * \param initExec     initializes the number of executives that made purchases
+     * \param initMem      initializes the number of members that made purchases
+     * \param initDate     initializes the date
+     * \param initTomorrow initializes the pointer that points to the next date
+     * \param initFirst    initializes the pointer that points to the first purchase of the day
+     * \param initLast     initializes the pointer that points to the last purchase of the day
      */
-    SalesDay(float initRevenue, int initExec, int initMem, QString initDate,
-             SalesDay *initTomorrow, Purchase *initFirst, Purchase *initLast);
+    SalesDay(float initRevenue, int initExec, int initMem, QString initDate, SalesDay *initTomorrow, Purchase *initFirst, Purchase *initLast);
 
-    //! Alternative Constructor
+    //! The SalesDay constructor
     /*!
-     * \brief The SalesDay alternative constructor will create the next sales day
-     * \param a
+     * \brief This is the constructor of the SalesDay class that takes in another SalesDay object
+     * \param a another SalesDay object that is used to initialize another SalesDay object
      */
     SalesDay(SalesDay *a);
 
-    //! Get the next sales day
+    /*! Accessor functions */
+
+    //! The GetNextDay function
     /*!
-     * \brief GetNextDay will return a pointer of the next sales day
-     * \return next sales day
+     * \brief GetNextDay returns a pointer to the next day in the list
      */
     SalesDay *GetNextDay();
 
-    //! Get the first purchase
+    //! The GetFirstPurchase function
     /*!
-     * \brief GetFirstPurchase will return the first purchase of the day
-     * \return the first purchase
+     * \brief GetFirstPurchase returns a pointer to the first purchase of the current day
      */
     Purchase *GetFirstPurchase();
 
-    //! Get the last purchase
+    //! The GetLastPurchase function
     /*!
-     * \brief GetLastPurchase will get the last purchase of the day
-     * \return the last purchase
+     * \brief GetLastPurchase returns the most recent purchase of the current day
      */
     Purchase *GetLastPurchase();
 
-    //! Get the date of purchase
+    //! The GetDate function
     /*!
-     * \brief GetDate will get the day of purchase of the day
-     * \return the date of purchase
+     * \brief GetDate returns the current date
      */
     QString GetDate();
 
-    //! Get the member
+    //! The GetMem function
     /*!
-     * \brief GetMem will get the number of member in the list
-     * \return the member number
+     * \brief GetMem returns the number of members that have made purchases
      */
     int GetMem();
 
-    //! Get the executive member
+    //! The GetExec function
     /*!
-     * \brief GetExec will get the number of executive members in the list
-     * \return the executive member number
+     * \brief GetExec returns the number of executives that have made purchases
      */
     int GetExec();
 
-    //! Get the revenue
+    //! The GetRevenue function
     /*!
-     * \brief GetRevenue will return the revenue
-     * \return the revenue
+     * \brief GetRevenue returns the amount of revenue made in the day
      */
     float GetRevenue();
 
-    //! Sets the date
+    /*! Mutator functions */
+
+    //! The SetDate function
     /*!
-     * \brief SetDate will set the date of purchase
-     * \param today
+     * \brief SetDate sets the date of the current day
+     * \param today The current date
      */
     void SetDate(QString today);
 
-    //! Increase Revenue
+    //! The IncreaseRevenue function
     /*!
-     * \brief IncreaseRevenue will increase the revenue
-     * \param addRevenue
+     * \brief IncreaseRevenue increases the revenue made during the day
+     * \param addRevenue The revenue that will be added
      */
     void IncreaseRevenue(int addRevenue);
 
-    //! The member count
+    //! The MemberCount function
     /*!
-     * \brief MemberCount will get the member count
-     * \param member
+     * \brief MemberCount will increase the count of members or executives
+     * \param member The type of membership
      */
     void MemberCount(bool member);
 
-    //! Add purchase
+    //! The AddPurchase function
     /*!
-     * \brief AddPurchase will add the purchase to the end of list
-     * \param a
-     * \param memList
+     * \brief AddPurcahse will add a purchase to the list of purchases made in the day
+     * \param a       The purchase object that will be added
+     * \param memList The list of members
      */
     void AddPurchase(Purchase *a, member *memList);
 
-    //! Set the first purchase
+    //! The SetFirstPurchase function
     /*!
-     * \brief SetFirstPurchase will set the first purchase to the front of the list
-     * \param newFirst
+     * \brief SetFirstPurchase sets the first purchase of the day
+     * \param newFirst The first purchase to be added to the list
      */
     void SetFirstPurchase(Purchase *newFirst);
 
-    //! Set the last purchase
+    //! The SetLastPurchase function
     /*!
-     * \brief SetLastPurchase will set the last purchase to the end of the list
-     * \param newLast
+     * \brief SetLastPurchase sets the last purchase of the day
+     * \param newLast The last purchase to be added to the list
      */
     void SetLastPurchase(Purchase *newLast);
 
-    //! Set next day
+    //! The SetNextDay function
     /*!
-     * \brief SetLastPurchase will set the next day of sales
-     * \param a
+     * \brief SetNextDay sets the date for the next day
+     * \param a The object for the sales day
      */
     void SetNextDay(SalesDay *a);
 
-    //! Print information
+    /*! Other functions */
+    //! The Print function
     /*!
-     * \brief Print will print information of the day sales
+     * \brief Print will print out information relevant to the SalesDay class
      */
     void Print();
 
-    //! The Destructor
+    /*! Destructor */
+
+    //! The SalesDay destructor
     /*!
-     * \brief The destructor will destroy the sales day list
+     * \brief This is the destructor for the SalesDay class
+     * \param today The current date
      */
     ~SalesDay();
 };

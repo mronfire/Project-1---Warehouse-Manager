@@ -750,7 +750,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        stackedWidget->setCurrentIndex(7);
+        stackedWidget->setCurrentIndex(0);
         listWidget_members->setCurrentRow(-1);
 
 

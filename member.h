@@ -30,15 +30,15 @@ const float REBATE_RATE = 0.0325;
 class member
 {
 private:
-    QString name; /*! The member name */
-    QString number; /*! The member number*/
-    bool memType; /*! Determines if a member is executive(true) or regular(false) */
-    QString expiration; /*! The membership expiration date */
-    float totalSpent; /*! Total money spent by a member*/
-    float totalTax; /*! Total money spent by member after tax */
-    member *nextMember; /*! member pointer that points to the next member */
-    Purchase *firstPurchase; /*! purchase pointer that points to the first purchase */
-    Purchase *lastPurchase; /*! purchase pointer that points to the last purchase */
+    QString name;            /*!< The member name */
+    QString number;          /*!< The member number*/
+    bool memType;            /*!< Determines if a member is executive(true) or regular(false) */
+    QString expiration;      /*!< The membership expiration date */
+    float totalSpent;        /*!< Total money spent by a member*/
+    float totalTax;          /*!< Total money spent by member after tax */
+    member *nextMember;      /*!< member pointer that points to the next member */
+    Purchase *firstPurchase; /*!< purchase pointer that points to the first purchase */
+    Purchase *lastPurchase;  /*!< purchase pointer that points to the last purchase */
 
 public:
     //!The member class constructor

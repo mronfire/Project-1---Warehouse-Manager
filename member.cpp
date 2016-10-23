@@ -185,7 +185,7 @@ void member::CalcTotalSpent()
         total += purchTotal;
         temp = temp->getNextMember();
 
-        /*! If the purchase is the last purchase quit the loop*/
+        /*! \if the purchase is the last purchase quit the loop*/
         if(temp == lastPurchase)
         {
             quit = true;
@@ -231,14 +231,14 @@ void member::Expiration(QString a)
     m2 = today.at(1).digitValue();
     month2 = (m1 * 10) + m2;
 
-    /*! If the expiration date is today */
+    /*! \if the expiration date is today */
     if(month1 == month2 && expiration[9] == today[9])
     {
         cout << "Your membership expires this month!\n" << "Would you like to renew your membership?";
         //cin.get(b); //Can't get from console. Assign to buttons.
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-        /*! If member wants to renew their membership */
+        /*! \if member wants to renew their membership */
         if(b == 'y' || b == 'Y')
         {
             Renew();
@@ -266,19 +266,19 @@ void member::Renew()
     y3 = expiration.at(8).digitValue();
     y4 = expiration.at(9).digitValue();
 
-    /*! If the fourth digit of the year is 9 set it to 0 and increment third digit */
+    /*! \if the fourth digit of the year is 9 set it to 0 and increment third digit */
     if(y4 == 9)
     {
         y4 = 0;
         y3++;
 
-        /*! If the third digit of the year is 10 set it to 0 and increment second digit */
+        /*! \if the third digit of the year is 10 set it to 0 and increment second digit */
         if(y3 == 10)
         {
             y3 = 0;
             y2++;
 
-            /*! If the second digit of the year is 10 set it to 0 and increment first digit */
+            /*! \if the second digit of the year is 10 set it to 0 and increment first digit */
             if(y2 == 10)
             {
                 y2 = 0;
@@ -286,7 +286,7 @@ void member::Renew()
             }
         }
     }
-    /*! Else increment fourth digit */
+    /*! \else increment fourth digit */
     else
     {
         y4++;
